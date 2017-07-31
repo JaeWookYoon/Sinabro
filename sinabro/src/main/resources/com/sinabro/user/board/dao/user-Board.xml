@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--DAO에 인터페이스 경로   -->
+<mapper namespace="com.sinabro.user.board.dao">
+	<resultMap type="com.sinabro.model.BoardVO" id="BoardResult">
+		<result property="num" column="NUM" jdbcType="BIGINT" />
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		
+		<result property="subject" column="SUBJECT" jdbcType="VARCHAR" />
+		
+		<result property="readcount" column="READCOUNT" jdbcType="BIGINT" />
+		<result property="regdate" column="REGDATE" jdbcType="TIMESTAMP" />
+		<result property="content" column="CONTENT" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap type="com.sinabro.model.CommentVO" id="commentResult">
+	<result property="dnum" column="DNUM" jdbcType="INTEGER"/>
+	<result property="id" column="ID" jdbcType="VARCHAR"/>
+	<result property="num" column="NUM" jdbcType="INTEGER"/>
+	<result property="content" column="CONTENT" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<!-- 전체 글 수 : 검색(All) -->
+	<select id="getAllCount" parameterType="java.util.Map" resultType="Integer">
+	<![CDATA[
+		select count(*) from BOARD
+		where ID = #{search_text} or subject like '%'||#{search_text}||'%' or
+		content like '%'||#{search_text}||'%'
+	]]>
+	</select>
+
+	<!-- 전체 글 수 : 검색(id) -->
+	<select id="getidCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from BOARD where ID = #{search_text}
+	</select>
+	
+
+	<!-- 전체 글 수 : 검색(subject) -->
+	<select id="getSubjectCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from BOARD where subject like '%'||#{search_text}||'%'
+	</select>
+	
+	<!-- 전체 글 수 : 검색(content) -->
+	<select id="getContentCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from BOARD where content like '%'||#{search_text}||'%'
+	</select>
+		
+	<!-- List(목록보기) :전체 -->
+	<select id="getList" parameterType="java.util.Map" resultMap="BoardResult">
+		<![CDATA[select * from (select rownum rnum, num, id, subject, content, regdate, readcount from (select * from BOARD order by num desc))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	<!-- List(목록보기) : 검색-->
+	<select id="getAllList" parameterType="java.util.Map" resultMap="BoardResult">
+		<![CDATA[
+		select * from (select rownum rnum, num, id,subject, content, regdate, readcount from (select * from BOARD
+		where id=#{search_text} or subject like '%'||#{search_text}||'%' or content like '%'||#{search_text}||'%' order by num desc))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- List(목록보기) : 검색(id)-->
+	<select id="getidList" parameterType="java.util.Map" resultMap="BoardResult">
+		<![CDATA[
+		select * from (select rownum rnum, num, id, pass, email, subject, content, regdate, readcount from (select * from BOARD
+		where id=#{search_text} order by num desc))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- List(목록보기) : 검색(subject)-->
+	<select id="getSubjectList" parameterType="java.util.Map" resultMap="BoardResult">
+		<![CDATA[
+		select * from (select rownum rnum, num,id, subject, content, regdate, readcount from (select * from BOARD
+		where subject like '%'||#{search_text}||'%' order by num desc))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- List(목록보기) :검색(conetent) -->
+	<select id="getContentList" parameterType="java.util.Map" resultMap="BoardResult">
+		<![CDATA[
+		select * from (select rownum rnum, num, id, subject, content, regdate, readcount 
+		from (select * from BOARD where content like '%'||#{search_text}||'%'
+		order by num desc)) where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="insertArticle" parameterType="com.sinabro.model.BoardVO">
+		<![CDATA[
+		insert into BOARD(num, id, subject, content) values(BOARD_seq.nextval,#{id},#{subject},#{content})
+		]]>
+	</insert>
+	<!-- 글보기 -->
+	<update id="upReadcount" parameterType="java.lang.Integer">
+		<![CDATA[
+		update BOARD set readcount = readcount+1
+		where num = #{num}
+		]]>
+	</update>
+	
+	<select id="getArticle" parameterType="java.lang.Integer" resultMap="BoardResult">
+		<![CDATA[
+		select * from BOARD where num = #{num} ]]>
+	</select>
+
+
+	<!-- 글 수정 -->
+	<update id="updateArticle" parameterType="com.sinabro.model.BoardVO">
+		<![CDATA[
+		update BOARD set id=#{id}, subject=#{subject}, content=#{content} where num =#{num}]]>
+	</update>	
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteArticle" parameterType="java.lang.Integer">
+		<![CDATA[
+		delete from BOARD where num =#{num}
+		]]>
+	</delete>	
+	
+	<select id="getComment" parameterType="java.lang.Integer" resultMap="commentResult">
+	select * from DATGUL where NUM=#{num}
+	</select>
+	<insert id="insertComment" parameterType="com.sinabro.model.CommentVO">
+	insert into DATGUL values(DATGUL_SEQ.nextval,#{id},#{num},#{content})
+	</insert>
+</mapper>

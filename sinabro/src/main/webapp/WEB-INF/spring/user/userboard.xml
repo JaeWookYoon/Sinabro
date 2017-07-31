@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd">
+
+<!-- Dao -->
+
+<bean id="boardDao" class="com.sinabro.user.board.dao.BoardDaoImpl">
+<property name="sqlSessionTemplate"> <ref bean="sqlSessionTemplate"/>
+</property></bean>
+
+<!-- paging 처리-->
+<bean id="boardPaging" class="com.sinabro.util.Paging" />
+<!-- 서비스 처리 -->
+<bean id="boardListService" class="com.sinabro.user.board.service.BoardListServiceImpl"
+	p:boardDao-ref="boardDao"/>
+
+<!-- Controller -->
+<!-- List 화면 -->
+<bean id="BoardListController" class="com.sinabro.user.board.controller.ListController"
+p:boardListService-ref="boardListService"
+p:boardPaging-ref="boardPaging" />
+
+<!-- 글쓰기 화면 -->
+<bean id="BoardWriteController" class="com.sinabro.user.board.controller.WriteController"
+	p:writeService-ref="writeService" />
+	
+<!-- 글보기 화면 -->
+<bean id="BoardGetArticleController" class="com.sinabro.user.board.controller.GetArticleController"
+p:getArticleService-ref="getArticleService" />
+
+<!-- 글수정 화면 -->
+ <bean id="BoardUpdateArticleController" class="com.sinabro.user.board.controller.UpdateArticleController"
+p:updateArticleService-ref="updateArticleService" />
+<!-- 글삭제 -->
+<bean id="BoardDeleteArticleController" class="com.sinabro.user.board.controller.DeleteArticleController"
+	p:deleteArticleService-ref="deleteArticleService"/>
+
+	
+<bean id="writeService" class="com.sinabro.user.board.service.WriteServiceImpl"
+	p:boardDao-ref="boardDao"/>
+
+<bean id="getArticleService" class="com.sinabro.user.board.service.GetArticleServiceImpl"
+	p:boardDao-ref="boardDao"/>
+
+<bean id="updateArticleService" class="com.sinabro.user.board.service.UpdateArticleServiceImpl"
+	p:boardDao-ref="boardDao"/>
+
+<bean id="deleteArticleService" class="com.sinabro.user.board.service.DeleteArticleServiceImpl"
+	p:boardDao-ref="boardDao"/>
+</beans>

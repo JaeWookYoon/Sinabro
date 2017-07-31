@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+<context:component-scan base-package="com.sinabro.user.member.controller" />
+<bean id="brypt" class="com.sinabro.util.BCrypt"></bean>
+<bean id="sha256" class="com.sinabro.util.SHA256"></bean>
+<bean id="loginDAO" class="com.sinabro.user.member.dao.LoginMemberDAOImpl"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+<bean id="loginService" class="com.sinabro.user.member.service.LoginMemberServiceImpl"><property name="loginDAO" ref="loginDAO"/></bean>
+<bean id="loginController" class="com.sinabro.user.member.controller.LoginController"><property name="loginService" ref="loginService"/></bean> 
+
+<bean id="addDAO" class="com.sinabro.user.member.dao.AddMemberDAOImpl"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+<bean id="addService" class="com.sinabro.user.member.service.AddMemberServiceImpl">
+<property name="addmemberDAO" ref="addDAO"/>
+<property name="crypt" ref="brypt"/>
+<property name="sha" ref="sha256"/>
+</bean>
+<bean id="addController" class="com.sinabro.user.member.controller.AddController"><property name="addMemberService" ref="addService"/></bean>
+
+<bean id="checkDAO" class="com.sinabro.user.member.dao.CheckMemberDAOImpl"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+<bean id="checkService" class="com.sinabro.user.member.service.CheckMemberServiceImpl"><property name="checkDAO" ref="checkDAO"/></bean>
+<bean id="checkController" class="com.sinabro.user.member.controller.CheckController"><property name="checkService" ref="checkService"></property></bean>
+</beans>

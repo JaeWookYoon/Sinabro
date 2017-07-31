@@ -1,0 +1,23 @@
+@charset "UTF-8";
+#body{
+		font-family:Calibri;
+}
+#left{
+	float:left;
+	padding:10px;
+}
+
+#right{
+	float:right;
+}
+#logo{
+	width:200px;
+	height:110px;
+}
+#left p{font-size:5px;}
+
+#logo{    
+	float:right;
+	width:30px;
+	height:30px;
+}
