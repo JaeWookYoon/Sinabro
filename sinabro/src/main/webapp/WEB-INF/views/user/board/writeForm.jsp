@@ -12,32 +12,21 @@
 </head>
 <body>
 <div align="center" class="body">
-<form method="post" name="writeForm" action="writeForm.do" enctype="multipart.form-data">
+<form method="post" name="writeForm" action="writeForm.do" enctype="multipart.form-data" onsubmit="writeCheck()">
 글쓰기
 <table width=450 border=1>
-<tr>
-   <td align="center">작성자</td>
-   <td align="left"><input type="text" name="writer" value="${writer }"/></td>
-</tr>
-<tr>
-   <td align="center">비밀번호</td>
-   <td align="left"><input type="password" name="pass" value="${pass }"/></td>
-</tr>
-<tr>
-   <td align="center">이메일</td>
-   <td align="left"><input type="text" name="email" value="${email }"/></td>
-</tr>
+
 <tr>
    <td align="center">제목</td>
    <td align="left"><input type="text" name="subject" value="${subject }"/></td>
 </tr>
 <tr>
    <td align="center">내용</td>
-   <td align="left" rows="13" cols="60"><textarea name="content"></textarea></td>
+   <td align="left" rows="13" cols="60"><textarea name="content" cols=20 rows=6></textarea></td>
 </tr>
 </table>
 <br/>
-<input type="button" value="글쓰기" onclick="writeCheck()" />
+<input type="submit" value="글쓰기"/>
 <input type="button" value="목록보기" onclick="window.location='list.do'" />
 
 </form>

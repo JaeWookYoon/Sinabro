@@ -1,7 +1,11 @@
 package com.sinabro.user.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,8 +57,100 @@ public class CheckController {
 			}
 			return model;
 		}
+		@RequestMapping(value="findForm.do")	
+	public String findSomething() {
+		return "/member/idPwSearchForm";
+	}
+	@RequestMapping(value="codeForm.do")
+	public String checkCode() {
+		return "member/checkCode";
+	}
+		@RequestMapping(value="findId.do",method=RequestMethod.POST)
+	public ModelAndView findId(HttpServletRequest request) {
+		ModelAndView model=new ModelAndView();	
+		
+			String name=request.getParameter("name");
+			String email=request.getParameter("emailone");
+		String code=checkService.findId(name, email);
+		
+		HttpSession session=request.getSession(true);
+		
 			
-
+		if(!code.equals("NO")) {//코드가 존재할 때 세션에 이름과 이메일 값과 코드를 저장. 코드는 나중에 비교할 때 사용할거임
+			session.setAttribute("findName", name);
+			session.setAttribute("findEmail", email);
+			session.setAttribute("emailCode", code);
+			model.addObject("codeId", new Integer(1));
+			model.setViewName("member/checkCode");
+		}else {//code가 존재하지 않을때
+			model.addObject("fail", "BAD");
+			model.setViewName("member/idPwSearchForm");
+		}
+		
+		return model;
+	}
+	@RequestMapping(value="checkIdCode.do",method=RequestMethod.POST)
+	public ModelAndView checkCode(HttpServletRequest request) {
+		ModelAndView model=new ModelAndView();
+		HttpSession session=request.getSession(false);
+		String code=request.getParameter("code");
+		if(!session.getAttribute("findName").equals(null)) {
+			if(session.getAttribute("emailCode").equals(code)) {
+			
+				List<String> id=checkService.getId((String)session.getAttribute("findEmail"));
+				model.addObject("codech", "y");
+				model.addObject("findId", id);
+				model.setViewName("/member/checkCode");
+			}else {
+				model.setViewName("/member/checkCode");
+			}
+		}else {
+			model.setViewName("/member/idPwSearchForm");
+		}
+		return model;
+	}
+	@RequestMapping(value="findPw.do",method=RequestMethod.POST)
+	public ModelAndView findPw(HttpServletRequest request) {
+		String id=request.getParameter("id");
+		String email=request.getParameter("emailtwo");
+		ModelAndView model=new ModelAndView();
+		String code=checkService.findPw(id, email);
+		HttpSession session=request.getSession();
+		if(!code.equals("NO")) {//코드가 존재할 때 세션에 이름과 이메일 값과 코드를 저장. 코드는 나중에 비교할 때 사용할거임
+			session.setAttribute("thisId", id);
+			session.setAttribute("findEmail", email);
+			session.setAttribute("emailCode", code);
+			model.addObject("codePw", new Integer(1));
+			model.setViewName("member/checkCode");
+		}else {//code가 존재하지 않을때
+			model.addObject("fail", "BAD");
+			model.setViewName("member/idPwSearchForm");
+		}
+		
+		return model;
+	}
+	@RequestMapping(value="checkPwCode.do",method=RequestMethod.POST)
+	public ModelAndView checkPwCode(HttpServletRequest request) {
+		ModelAndView model=new ModelAndView();
+		HttpSession session=request.getSession(false);
+		String code=request.getParameter("code");
+		if(!session.getAttribute("thisId").equals(null)) {
+			if(session.getAttribute("emailCode").equals(code)) {
+			
+				String pw=checkService.changPw((String)session.getAttribute("thisId"));
+				model.addObject("codech", "p");
+				model.addObject("findPw", pw);
+				model.setViewName("/member/checkCode");
+			}else {
+				model.setViewName("/member/checkCode");
+			}
+		}else {
+			model.setViewName("/member/idPwSearchForm");
+		}
+		return model;
+		
+	}
+	
 	
 	public void setCheckService(CheckMemberService checkService) {
 		this.checkService = checkService;

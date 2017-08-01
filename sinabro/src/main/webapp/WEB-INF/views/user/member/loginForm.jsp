@@ -38,7 +38,7 @@
 						<td id="join1"><a href="/sinabro/policy.do">JOIN
 								MEMBERSHIP</a></td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td id="join2"><a href="#">FINDING ID/PW</a></td>
+						<td id="join2"><a href="/sinabro/findForm.do">FINDING ID/PW</a></td>
 					</tr>
 				</table>
 			</form>

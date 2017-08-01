@@ -6,7 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="/sinabro/css/user/board/list.css">
 <%@include file="/WEB-INF/views/user/main.jsp"%>
+
+
+
+
 <script type="text/javascript">
 
 	function search() {
@@ -34,22 +40,38 @@ alert("글쓰기 권한이 없습니다.");
 window.location="loginForm.do";
 </script>
 </c:if>
-	<center>
-		<h3>게시판</h3>
-		<table width="700">
+	<center>	`
+	
+	<br><br>
+		<h3>FreeBoard</h3>
+		
+	<div id="wrapper">	
+		<table width="900" border="0" cellpadding="1" cellspacing="0">
+	
 		<tr>
-			<td align="right" colspan="5">
-				<input type="button" value="전체목록" onclick="window.location='list.do'" />
-				<input type="button" value="글쓰기" onclick="window.location='writeForm.do'"/>
-			</td>
-		</tr>
-		<tr>
-			<td align="center" width="60">번호</td>
-			<td align="center" width="380">제목</td>
-			<td align="center" width="100">작성자</td>
-			<td align="center" width="100">작성일</td>
-			<td align="center" width="60">조회수</td>
-		</tr>
+		
+		<thead>
+         <tr style="background-color:#CCC; font-family:Tahoma, Geneva, sans-serif; font-size:7pt; color:#666; ">
+        <th align="center" width="60">No.</th>
+			<th align="center" width="380">Content</th>
+			<th align="center" width="100">Name</th>
+			<th align="center" width="100">Date</th>
+			<th align="center" width="60">Hits</th>
+   		 </tr>
+    </thead>
+		
+		 <tbody>
+    <tr>
+    <td colspan="8" align="center" >
+    
+    </td>
+    </tr>
+    <tr><td height="10"></td></tr>
+     </tbody>
+		
+	
+		
+	
 		<!-- 글이 없을 경우 -->
 		<c:if test="${count==0 }">
 			<tr>
@@ -60,7 +82,7 @@ window.location="loginForm.do";
 			<c:forEach var="vo" items="${boardList }">
 				<tr>
 					<td align="center">${number }<c:set var="number" value="${number-1 }" scope="page"/></td>
-					<td align="left">
+					<td align="center">
 					<a href="content.do?num=${vo.num }&pageNum=${bp.currentPage}">&nbsp;${vo.subject }</a>
 					<c:if test="${vo.readcount > 10}">
 					</c:if></td>
@@ -71,10 +93,20 @@ window.location="loginForm.do";
 				</tr>
 			</c:forEach>
 		</c:if>
+		
+		
 		</table>
+		<div id="bt-zone">
+			
+				<input type="button" value="전체목록" onclick="window.location='list.do'" />
+				<input type="button" value="writer" onclick="window.location='writeForm.do'"/>
+			
+		</div>
+		</div>   <!-- wrapper -->
+		
 		<br/>
 		<c:if test="${bp.isPre() }">
-		<a href="list.do?pageNum=${bp.getPage_Start()-bp.p_size }">[이전]</a>
+		<a href="list.do?pageNum=${bp.getPage_Start()-bp.p_size }">[Previous]</a>
 		</c:if>
 		<c:forEach var="counter" begin="${bp.getPage_Start() }" end="${bp.getPage_End() }">
 		<c:if test="${search_text ne ''}">
@@ -82,21 +114,21 @@ window.location="loginForm.do";
 		[${counter }]</a>
 		</c:if>
 		<c:if test="${search_text eq ''}">
-		<a href="javascript:window.location='list.do?pageNum=${counter }'">
-		[${counter }]</a>
+		<a id="pageNum" href="javascript:window.location='list.do?pageNum=${counter }'">
+		${counter }</a>
 		</c:if>
 		</c:forEach>
 		<c:if test="${bp.isNext() }">
-		<a href="list.do?pageNum=${bp.getPage_Start()+bp.p_size }">[다음]</a>
+		<a href="list.do?pageNum=${bp.getPage_Start()+bp.p_size }">[Next]</a>
 		</c:if>
 		<p><p>
 		<form method="get" name="listForm" action="list.do">
 			<input type="hidden" name="pageNum" value="${pageNum }"/>
 			<select name="search_type">
 				<option value="all" ${search_type=="all"?"selected":"" }>전체</option>
-				<option value="subject" ${search_type=="subject"?"selected":"" }>제목</option>
-				<option value="writer" ${search_type=="writer"?"selected":"" }>작성자</option>
-				<option value="content" ${search_type=="content"?"selected":"" }>내용</option>
+				<option value="subject" ${search_type=="subject"?"selected":"" }>Title</option>
+				<option value="writer" ${search_type=="writer"?"selected":"" }>Writer</option>
+				<option value="content" ${search_type=="content"?"selected":"" }>Contents</option>
 			</select>
 			<input type="text" name="search_text" value="${search_text }"/>
 			<input type="button" value="검색" onclick="search()"/>

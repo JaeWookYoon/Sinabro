@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+#wrapper{
+	width:930px; 
+	margin:0 auto; 
+	padding-top:20px;
+}
+
+
+
+#cartfoot{
+	width:900px; 
+	text-align:center; 
+	font-size:12pt; 
+	color:#999;  
+	padding-top:60px; 
+	padding-bottom:60px;
+	font-family:NanumGothicWeb;
+	
+}
+
+#cartfootinner{
+margin-top: 5px;
+ font-family:NanumGothicWeb;
+ color:#999; 
+ }

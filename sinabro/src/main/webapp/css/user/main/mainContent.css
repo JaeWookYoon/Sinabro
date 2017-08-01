@@ -1,5 +1,11 @@
 @charset "UTF-8";
+body{
+	width:85%;
+	margin-left: auto;
+	margin-right: auto;
+}
 #wrap{
+	width:
       font-family:Calibri;
       position:absolute;
       z-index: 1;

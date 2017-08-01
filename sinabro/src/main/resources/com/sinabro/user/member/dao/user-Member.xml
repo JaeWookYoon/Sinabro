@@ -17,6 +17,9 @@
 		<result property="status" column="STATUS" jdbcType="INTEGER"/>
 		<result property="email" column="EMAIL" jdbcType="VARCHAR"/>
 	</resultMap>
+	<resultMap type="java.lang.String" id="nameResult">
+	</resultMap>
+	
 
 	<insert id="addUser" parameterType="com.sinabro.model.MemberVO">insert into
 		MEMBER(ID,PASSWORD,NAME,PHONE,ZIPCODE,ADDRESS1,ADDRESS2,EMAIL)
@@ -30,4 +33,16 @@
 	<select id="getUserInfo" parameterType="java.lang.String" resultType="com.sinabro.model.MemberVO">
 	select * from MEMBER where ID=#{id}
 	</select>
+	<select id="findId" parameterType="java.lang.String" resultType="java.lang.String">
+	select distinct EMAIL from MEMBER where NAME=#{name}
+	</select>
+	<select id="getId" parameterType="java.lang.String" resultMap="nameResult">
+	select distinct ID from MEMBER where EMAIL=#{email}
+	</select>
+	<select id="findPw" parameterType="java.lang.String" resultType="java.lang.String">
+	select EMAIL from MEMBER where ID=#{id}
+	</select>
+	<update id="changePw" parameterType="java.util.Map">
+	update MEMBER set PASSWORD=#{password} where ID=#{id}
+	</update>
 </mapper>

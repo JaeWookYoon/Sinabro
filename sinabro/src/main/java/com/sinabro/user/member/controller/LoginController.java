@@ -46,6 +46,7 @@ public class LoginController {
 				session.setAttribute("loginId", vo.getId());
 				session.setAttribute("loginName", vo.getName());
 				session.setAttribute("point", vo.getPoint());
+				session.setAttribute("sell", vo.getSell());
 				
 				model.setViewName("redirect:hi.do");//비번 일치
 			}else {

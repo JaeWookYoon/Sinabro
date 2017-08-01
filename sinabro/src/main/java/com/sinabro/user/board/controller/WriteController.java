@@ -51,6 +51,7 @@ public class WriteController {
     	  model.setViewName("board/list");
     	  return model;
       }else {
+    	  boardVo.setId((String)session.getAttribute("loginId"));
       this.writeService.insertWriting(boardVo);
       model.setViewName("redirect:/list.do");
       return model;

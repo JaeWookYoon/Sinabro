@@ -1,6 +1,9 @@
 @charset "UTF-8";
 #body{
+	margin-top:5%;
 		font-family:Calibri;
+		bottom: em;
+		clear:both;
 }
 #left{
 	float:left;

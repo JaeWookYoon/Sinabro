@@ -31,7 +31,7 @@
 				</ul></li>
 			<li><a href="#">Board</a>
 				<ul>
-					<li><a href="#">Free Board</a></li>
+					<li><a href="/sinabro/list.do">Free Board</a></li>
 					<li><a href="#">Q&A</a></li>
 				</ul></li>
 			<li><a href="#">News</a>

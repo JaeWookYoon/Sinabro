@@ -33,14 +33,11 @@
 				</tr>
 				<tr>
 					<td align="center">작성자</td>
-					<td align="left">${vo.writer}</td>
+					<td align="left">${vo.id}</td>
 					<td align="center">조회수</td>
 					<td align="left">${vo.readcount}</td>
 				</tr>
-				<tr>
-					<td align="center">이메일</td>
-					<td colspan="7" align="left">${vo.email}</td>
-				</tr>
+				
 				<tr>
 					<td align="center">제목</td>
 					<td colspan="7" align="left">${vo.subject}</td>
