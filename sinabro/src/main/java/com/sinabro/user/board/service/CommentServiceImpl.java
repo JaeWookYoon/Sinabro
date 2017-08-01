@@ -18,13 +18,13 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public int insertComment(CommentVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.insertComment(vo);
 	}
 
 	@Override
 	public List<CommentVO> getComment(int num) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getComment(num);
 	}
 
 }

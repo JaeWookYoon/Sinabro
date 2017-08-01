@@ -60,4 +60,16 @@ p:updateArticleService-ref="updateArticleService" />
 
 <bean id="deleteArticleService" class="com.sinabro.user.board.service.DeleteArticleServiceImpl"
 	p:boardDao-ref="boardDao"/>
+
+<bean id="commentDAO" class="com.sinabro.user.board.dao.CommentDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+</bean>
+<bean id="commentService" class="com.sinabro.user.board.service.CommentServiceImpl">
+<property name="dao" ref="commentDAO"/>
+</bean>
+<bean id="commentController" class="com.sinabro.user.board.controller.CommentController">
+<property name="commentService" ref="commentService"/>
+</bean>
+
+
 </beans>
