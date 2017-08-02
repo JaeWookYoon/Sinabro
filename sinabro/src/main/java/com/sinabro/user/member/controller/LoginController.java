@@ -37,7 +37,9 @@ public class LoginController {
 		ModelAndView model=new ModelAndView();
 		HttpSession session=request.getSession(true);
 		MemberVO vo=loginService.getUserInfo(id);
-		if(!vo.getId().equals(null)) {//아이디값이 존재
+		try{
+			if(!vo.getId().equals(null)) {//아이디값이 존재
+		
 			SHA256 sha=SHA256.getInsatnce();
 			String sh=sha.getString(password.getBytes());
 			if(BCrypt.checkpw(sh, vo.getPassword())) {
@@ -50,10 +52,17 @@ public class LoginController {
 				
 				model.setViewName("redirect:hi.do");//비번 일치
 			}else {
-				model.addObject("loginCheck", new Integer(0));
+				System.out.println("비번없음");
+				model.addObject("check", new Integer(2));
 				model.setViewName("member/loginForm");//비번 불일치할 경우
 			}
 		}else {
+			System.out.println("아이디없음");
+			model.addObject("check", new Integer(0));
+			model.setViewName("member/loginForm");//아이디 없을때
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
 			model.addObject("check", new Integer(0));
 			model.setViewName("member/loginForm");//아이디 없을때
 		}

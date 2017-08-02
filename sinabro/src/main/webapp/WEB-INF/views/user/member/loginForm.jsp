@@ -12,6 +12,16 @@
 <%@include file="/WEB-INF/views/user/main.jsp"%>
 </head>
 <body>
+<c:if test="${check==0}">
+<script>
+alert("아이디가 존재하지 않습니다.");
+</script>
+</c:if>
+<c:if test="${check==2}">
+<script>
+alert("비밀번호가 일치하지 않습니다.");
+</script>
+</c:if>
 	<div id="wrap">
 		<p>로그인</p>
 		<hr>
