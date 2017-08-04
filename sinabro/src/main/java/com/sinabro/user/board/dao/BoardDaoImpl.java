@@ -58,11 +58,8 @@ public class BoardDaoImpl implements BoardDao {
 
 	}
 
-	// 글보기
-	@Override
-	public BoardVO getArticle(Integer num) {
-		return sqlSessionTemplate.selectOne(namespace + "getArticle", num);
-	}
+	
+	
 
 	// 글수정
 	@Override
@@ -77,5 +74,11 @@ public class BoardDaoImpl implements BoardDao {
 	public void deleteArticle(Integer num) {
 		sqlSessionTemplate.delete(namespace + "deleteArticle", num);
 	}
+	//글보기
+	@Override
+	   public BoardVO getArticle(Integer num) {
+	      sqlSessionTemplate.update(namespace + "upReadcount", num);
+	      return sqlSessionTemplate.selectOne(namespace + "getArticle", num);
+	   }
 
 }

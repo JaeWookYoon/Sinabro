@@ -19,4 +19,22 @@ public class LoginMemberDAOImpl implements LoginMemberDAO{
 		
 		return sqlSessionTemplate.selectOne(namespace+"getUserInfo",id);
 	}
+
+	@Override
+	public int updateStatus(String id) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.update(namespace+"updateStatus",id);
+	}
+
+	@Override
+	public int getStatus(String id) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne(namespace+"getStatus",id);
+	}
+
+	@Override
+	public int outStatus(String id) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.update(namespace+"outStatus",id);
+	}
 }

@@ -49,7 +49,7 @@ getDat();
 				onclick="window.location='updateForm.do?num=${vo.num}'" /> 
 				<input
 				type="button" value="글삭제"
-				onclick="window.location='deleteForm.do?num=${vo.num}'" /> 
+				onclick="window.location='deleteProc.do?num=${vo.num}'" /> 
 	</c:if>
 				<input
 				type="button" value="목록보기" onclick="window.location='list.do'" />

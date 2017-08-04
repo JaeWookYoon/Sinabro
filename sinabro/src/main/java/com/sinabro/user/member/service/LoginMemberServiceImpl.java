@@ -21,6 +21,27 @@ public class LoginMemberServiceImpl implements LoginMemberService{
 		
 		return loginDAO.getUserInfo(id);
 	}
+
+
+	@Override
+	public int updateStatus(String id) {
+		// TODO Auto-generated method stub
+		return loginDAO.updateStatus(id);
+	}
+
+
+	@Override
+	public int getStatus(String id) {
+		// TODO Auto-generated method stub
+		return loginDAO.getStatus(id);
+	}
+
+
+	@Override
+	public int outStatus(String id) {
+		// TODO Auto-generated method stub
+		return loginDAO.outStatus(id);
+	}
 		
 		
 	

@@ -109,7 +109,7 @@
 	<!-- 글 수정 -->
 	<update id="updateArticle" parameterType="com.sinabro.model.BoardVO">
 		<![CDATA[
-		update BOARD set id=#{id}, subject=#{subject}, content=#{content} where num =#{num}]]>
+		update BOARD set subject=#{subject}, content=#{content} where num =#{num}]]>
 	</update>	
 	
 	<!-- 글 삭제 -->

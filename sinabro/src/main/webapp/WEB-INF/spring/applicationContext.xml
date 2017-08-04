@@ -25,6 +25,8 @@
 	</bean>
 	<!-- File업로드 용 Bean등록 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize" value="1000000000"/>
+	<property name="defaultEncoding" value="UTF-8"/>
 	</bean>
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 	
@@ -43,4 +45,5 @@
           </list>
      </property>                       
 </bean>
+
 </beans>

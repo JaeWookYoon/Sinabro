@@ -42,7 +42,12 @@ public class LoginController {
 		
 			SHA256 sha=SHA256.getInsatnce();
 			String sh=sha.getString(password.getBytes());
-			if(BCrypt.checkpw(sh, vo.getPassword())) {
+			if(BCrypt.checkpw(sh, vo.getPassword())) {//비번 일치
+				if(loginService.getStatus(id)==1) {
+					model.addObject("check", new Integer(3));
+					model.setViewName("member/loginForm");
+				}else {
+				loginService.updateStatus(id);
 				session.setAttribute("loginCheck", new Integer(1));
 				session.setAttribute("member", vo);
 				session.setAttribute("loginId", vo.getId());
@@ -50,7 +55,9 @@ public class LoginController {
 				session.setAttribute("point", vo.getPoint());
 				session.setAttribute("sell", vo.getSell());
 				
+				
 				model.setViewName("redirect:hi.do");//비번 일치
+				}//로그인 가능상태
 			}else {
 				System.out.println("비번없음");
 				model.addObject("check", new Integer(2));
@@ -73,6 +80,7 @@ public class LoginController {
 		HttpSession session=request.getSession(false);
 		ModelAndView model=new ModelAndView();
 		if(session.getAttribute("loginId")!=null) {
+			loginService.outStatus((String)session.getAttribute("loginId"));
 			session.invalidate();
 			model.setViewName("redirect:hi.do");
 		}else {
@@ -80,6 +88,14 @@ public class LoginController {
 		}
 			return model;
 		
+	}
+	@RequestMapping(value="out.do")//브라우저 종료시 status 변경값 적용 가능.
+	public void out(HttpServletRequest request) {
+		HttpSession session=request.getSession(false);
+		if(session.getAttribute("loginId")!=null||!session.getAttribute("loginId").equals(null)) {
+		loginService.outStatus((String)session.getAttribute("loginId"));
+		}
+		session.invalidate();
 	}
 }
 		

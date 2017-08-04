@@ -1,5 +1,5 @@
 function writeCheck() {
-	alert("야");
+	
 
 	if (document.writeForm.subject.value == "") {
 		alert("제목을 입력해 주세요");
@@ -11,7 +11,7 @@ function writeCheck() {
 		document.write.content.focus();
 		return false;
 	}
-	
+	document.writeForm.submit();
 }
 function addFile(num) {
 	var v = document.getElementById('list_dis');

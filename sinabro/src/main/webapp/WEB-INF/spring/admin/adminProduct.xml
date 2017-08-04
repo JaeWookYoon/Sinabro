@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="productDAO" class="com.sinabro.manager.product.dao.ProductAddDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+</bean>
+<bean id="productService" class="com.sinabro.manager.product.service.ProductAddServiceImpl">
+<property name="productDao" ref="productDAO"/>
+</bean>
+<bean id="productController" class="com.sinabro.manager.product.controller.ProductAddController">
+<property name="productService" ref="productService"/>
+</bean>
+
+</beans>

@@ -16,28 +16,27 @@ import com.sinabro.user.board.service.UpdateArticleService;
 @Controller
 public class UpdateArticleController {
 
-	private UpdateArticleService updateArticleService;
+   private UpdateArticleService updateArticleService;
 
-	public void setUpdateArticleService(UpdateArticleService updateArticleService) {
-		this.updateArticleService = updateArticleService;
-	}
+   public void setUpdateArticleService(UpdateArticleService updateArticleService) {
+      this.updateArticleService = updateArticleService;
+   }
 
-	@RequestMapping(value = "updateForm.do", method = RequestMethod.GET)
-	public ModelAndView setView(Integer num) {
-		BoardVO boardVo = this.updateArticleService.getArticle(num);
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("vo", boardVo);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/board/updateForm");
-		mav.addAllObjects(model);
-		return mav;
-	}
+   @RequestMapping(value = "updateForm.do", method = RequestMethod.GET)
+   public ModelAndView setView(Integer num) {
+      BoardVO boardVo = this.updateArticleService.getArticle(num);
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("vo", boardVo);
+      ModelAndView mav = new ModelAndView();
+      mav.setViewName("/board/updateForm");
+      mav.addAllObjects(model);
+      return mav;
+   }
 
-	@RequestMapping(value = "updateForm.do", method = RequestMethod.POST)
-	public ModelAndView onSubmit(HttpServletRequest request, BoardVO boardVo) throws Exception {
-		
-			return new ModelAndView();
-		}
-	
-
+   @RequestMapping(value = "updateForm.do", method = RequestMethod.POST)
+   public ModelAndView onSubmit(HttpServletRequest request, BoardVO boardVo) throws Exception {
+	   System.out.println("들어온다");
+      this.updateArticleService.updateArticle(boardVo);
+      return new ModelAndView("redirect:list.do");
+   }
 }

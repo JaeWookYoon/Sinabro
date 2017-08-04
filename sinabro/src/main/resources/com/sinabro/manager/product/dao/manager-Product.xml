@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinabro.manager.product.dao">
+<resultMap type="com.sinabro.model.ProductVO" id="productVO">
+<result property="product_code" column="PRODUCT_CODE" jdbcType="VARCHAR"/>
+<result property="brand" column="BRAND" jdbcType="VARCHAR"/>
+<result property="category" column="CATEGORY" jdbcType="VARCHAR"/>
+<result property="mainImg" column="MAINIMG" jdbcType="VARCHAR"/>
+<result property="name" column="NAME" jdbcType="VARCHAR"/>
+<result property="quantity" column="QUANTITY" jdbcType="VARCHAR"/>
+<result property="sizea" column="SIZEA" jdbcType="VARCHAR"/>
+<result property="price" column="PRICE" jdbcType="VARCHAR"/>
+</resultMap>
+<insert id="addProduct" parameterType="com.sinabro.model.ProductVO">
+insert into PRODUCT values(#{product_code},#{brand},#{category},#{mainImg},#{name},#{quantity},#{sizea},#{price},#{optiona})
+</insert>
+<select id="checkBrand" parameterType="java.lang.String" resultType="java.lang.Integer">
+select count(*) from BRAND where brand=#{brand}
+</select>
+<insert id="newProductCode" parameterType="java.lang.String">
+insert into PRODUCT_CODE values(#{product_code})
+</insert>
+<insert id="insertBrand" parameterType="java.lang.String">
+insert into Brand values(#{brand})
+</insert>
+
+<select id="imgSEQ">
+select IMG_SEQ.nextval from dual
+</select>
+</mapper>
