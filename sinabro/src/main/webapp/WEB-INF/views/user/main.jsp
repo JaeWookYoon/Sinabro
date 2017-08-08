@@ -4,6 +4,8 @@
 <!DOCTYPE html">
 <link rel="stylesheet" href="/sinabro/css/main.css" />
 <script src="/sinabro/js/user/main.js"></script>
+<script src="/sinabro/js/user/footer.js"></script>
+<script src="/sinabro/js/jquery-3.2.1.min.js"></script>
 <script>
 window.onunload=function(){
 	var user=navigator.userAgent.toLowerCase();
@@ -17,6 +19,14 @@ window.onunload=function(){
 }
 
 </script>
+<script>
+window.onload=function(){
+	checkStatus();
+}
+	
+</script>
+
+${sessionScope.asd12}
 <div id="wrappermain">
 	<div id="headerLogo">
 		<a href="/sinabro/hi.do">SinaBro</a><br /> <label>Will steal

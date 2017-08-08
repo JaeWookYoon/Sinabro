@@ -24,25 +24,27 @@ public class LoginMemberServiceImpl implements LoginMemberService{
 
 
 	@Override
-	public int updateStatus(String id) {
+	public int updateIp(Object map) {
 		// TODO Auto-generated method stub
-		return loginDAO.updateStatus(id);
+		return loginDAO.updateIp(map);
 	}
 
 
 	@Override
-	public int getStatus(String id) {
+	public int deleteIp(Object map) {
 		// TODO Auto-generated method stub
-		return loginDAO.getStatus(id);
+		return loginDAO.deleteIp(map);
 	}
 
 
 	@Override
-	public int outStatus(String id) {
+	public String checkIp(String id) {
 		// TODO Auto-generated method stub
-		return loginDAO.outStatus(id);
+		return loginDAO.checkIp(id);
 	}
-		
+
+
+	
 		
 	
 	

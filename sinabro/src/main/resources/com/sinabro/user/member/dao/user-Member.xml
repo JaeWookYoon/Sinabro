@@ -47,13 +47,14 @@
 	<update id="changePw" parameterType="java.util.Map">
 	update MEMBER set PASSWORD=#{password} where ID=#{id}
 	</update>
-	<update id="updateStatus" parameterType="java.lang.String">
-	update MEMBER set STATUS=1 where ID=#{id}
+	<update id="updateIp" parameterType="java.util.Map">
+	update MEMBER set IP=#{ip} where ID=#{id}
 	</update>
-	<select id="getStatus" parameterType="java.lang.String" resultType="java.lang.Integer">
-	select STATUS from MEMBER where ID=#{id}
+	<update id="deleteIp" parameterType="java.util.Map">
+	update MEMBER set IP=#{ip} where ID=#{id}
+	</update>
+	<select id="checkIp" parameterType="java.lang.String" resultType="java.lang.String">
+	select IP from MEMBER where ID=#{id}
 	</select>
-	<update id="outStatus" parameterType="java.lang.String">
-	update MEMBER set STATUS=0 where ID=#{id}
-	</update>
+	
 </mapper>

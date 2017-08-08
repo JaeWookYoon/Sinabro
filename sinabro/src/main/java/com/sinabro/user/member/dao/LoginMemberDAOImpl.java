@@ -21,20 +21,22 @@ public class LoginMemberDAOImpl implements LoginMemberDAO{
 	}
 
 	@Override
-	public int updateStatus(String id) {
+	public int updateIp(Object map) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.update(namespace+"updateStatus",id);
+		return sqlSessionTemplate.update(namespace+"updateIp",map);
 	}
 
 	@Override
-	public int getStatus(String id) {
+	public int deleteIp(Object map) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectOne(namespace+"getStatus",id);
+		return sqlSessionTemplate.update(namespace+"deleteIp", map);
 	}
 
 	@Override
-	public int outStatus(String id) {
+	public String checkIp(String id) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.update(namespace+"outStatus",id);
+		return sqlSessionTemplate.selectOne(namespace+"checkIp",id);
 	}
+
+	
 }

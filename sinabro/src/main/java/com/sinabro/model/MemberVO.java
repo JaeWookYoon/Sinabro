@@ -12,7 +12,7 @@ public class MemberVO {
 	private String address2;
 	private int sell;
 	private int point;
-	private int status;
+	private String ip;
 	private String email;
 	private String gender;
 	private int admin;
@@ -29,11 +29,12 @@ public class MemberVO {
 	public void setAdmin(int admin) {
 		this.admin = admin;
 	}
-	public int getStatus() {
-		return status;
+	
+	public String getIp() {
+		return ip;
 	}
-	public void setStatus(int status) {
-		this.status = status;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 	public String getEmail() {
 		return email;

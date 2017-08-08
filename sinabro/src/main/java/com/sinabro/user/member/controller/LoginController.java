@@ -1,8 +1,13 @@
 package com.sinabro.user.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,11 +26,11 @@ public class LoginController {
 	public void setLoginService(LoginMemberService loginService) {
 		this.loginService = loginService;
 	}
-	@RequestMapping(value="/loginForm.do")
+	@RequestMapping(value="/loginForm.do",method=RequestMethod.GET)
 	public String getloginForm() {
 		return "member/loginForm";
 	}
-	@RequestMapping(value="/hi.do")
+	@RequestMapping(value="/hi.do",method=RequestMethod.GET)
 	public String getMain() {
 		return "member/mainContent";
 	}
@@ -35,29 +40,39 @@ public class LoginController {
 		String id=request.getParameter("id");
 		String password=request.getParameter("password");
 		ModelAndView model=new ModelAndView();
-		HttpSession session=request.getSession(true);
+		String ip=request.getRemoteAddr();
+		HttpSession session=request.getSession(false);
+		
 		MemberVO vo=loginService.getUserInfo(id);
+		int result=0;
+		Map<String,Object>map=new HashMap<String,Object>();
 		try{
 			if(!vo.getId().equals(null)) {//아이디값이 존재
 		
 			SHA256 sha=SHA256.getInsatnce();
 			String sh=sha.getString(password.getBytes());
+			
 			if(BCrypt.checkpw(sh, vo.getPassword())) {//비번 일치
-				if(loginService.getStatus(id)==1) {
-					model.addObject("check", new Integer(3));
-					model.setViewName("member/loginForm");
+				
+				map.put("id", id);
+				map.put("ip", ip);
+				if(vo.getIp()==null||vo.getIp().equals(null)) {
+				result=loginService.updateIp(map);
 				}else {
-				loginService.updateStatus(id);
+					result=loginService.updateIp(map);
+				}
+				if(result==1) {
 				session.setAttribute("loginCheck", new Integer(1));
 				session.setAttribute("member", vo);
 				session.setAttribute("loginId", vo.getId());
 				session.setAttribute("loginName", vo.getName());
 				session.setAttribute("point", vo.getPoint());
 				session.setAttribute("sell", vo.getSell());
-				
+				session.setAttribute("memberip", ip);
+				//로그인 가능상태
 				
 				model.setViewName("redirect:hi.do");//비번 일치
-				}//로그인 가능상태
+				}
 			}else {
 				System.out.println("비번없음");
 				model.addObject("check", new Integer(2));
@@ -79,25 +94,53 @@ public class LoginController {
 	public ModelAndView getLogout(HttpServletRequest request) {
 		HttpSession session=request.getSession(false);
 		ModelAndView model=new ModelAndView();
+		Map<String,Object>map=new HashMap<String,Object>();
 		if(session.getAttribute("loginId")!=null) {
-			loginService.outStatus((String)session.getAttribute("loginId"));
+			String id=(String)session.getAttribute("loginId");
+			String ip="0";
+			map.put("id", id);map.put("ip", ip);
+			int result=loginService.deleteIp(map);
+			if(result==1) {
 			session.invalidate();
 			model.setViewName("redirect:hi.do");
+			}
 		}else {
 			
 		}
 			return model;
 		
 	}
-	@RequestMapping(value="out.do")//브라우저 종료시 status 변경값 적용 가능.
-	public void out(HttpServletRequest request) {
+	
+	@RequestMapping(value="checkStatus.do")
+	public ResponseEntity<Map<String,Object>> checkIp(HttpServletRequest request) {
+		ResponseEntity<Map<String,Object>>entity=null;
+		String ip=request.getRemoteAddr();
 		HttpSession session=request.getSession(false);
-		if(session.getAttribute("loginId")!=null||!session.getAttribute("loginId").equals(null)) {
-		loginService.outStatus((String)session.getAttribute("loginId"));
+		Map<String,Object>map=new HashMap<String,Object>();
+		if(session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {
+			map.put("success", true);
+			entity=new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
+		}else {
+			String now=loginService.checkIp((String)session.getAttribute("loginId"));
+			if(!now.equals(ip)) {
+				try {
+					map.put("fail", true);
+					entity=new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
+				}catch(Exception e) {
+					e.printStackTrace();
+					entity=new ResponseEntity<Map<String,Object>>(HttpStatus.BAD_REQUEST);
+				}
+			}
 		}
-		session.invalidate();
+		return entity;
 	}
+	
+	@RequestMapping(value="out.do")
+	public String out(HttpServletRequest request) {
+		HttpSession session=request.getSession(false);
+		session.invalidate();
+		return "redirect:hi.do";
+	}
+	
 }
-		
-		
 		

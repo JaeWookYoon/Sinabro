@@ -24,9 +24,15 @@ alert("비밀번호가 일치하지 않습니다.");
 </c:if>
 <c:if test="${check==3}">
 <script>
-alert("현재 로그인되어 있습니다.");
+alert("현재 동일 브라우저 로그인되어 있습니다.");
 </script>
 </c:if>
+<c:if test="${check==4}">
+<script>
+alert("다른 브라우저에서 로그인되어 있습니다.");
+</script>
+</c:if>
+
 	<div id="wrap">
 		<p>로그인</p>
 		<hr>

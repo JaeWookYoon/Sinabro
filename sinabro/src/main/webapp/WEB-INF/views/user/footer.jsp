@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="/sinabro/css/user/main/footer.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <div id="left">
