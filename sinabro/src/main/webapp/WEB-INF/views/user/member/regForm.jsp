@@ -73,6 +73,14 @@
 							type="text" name="phone2" /></td>
 					</tr>
 					<tr>
+					<th>성별</th>
+					
+					
+					<td>
+					<input type="radio" name="gender" value="man"/>man<input type="radio" name="gender" value="woman"/>woman
+					</td>
+					</tr>
+					<tr>
 						<th>이메일</th>
 						<td><input id="email" type="text" name="email" />@<select id="emailaddress" name="emailaddress">
 						<option value="naver.com">naver.com</option>

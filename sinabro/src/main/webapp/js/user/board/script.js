@@ -11,7 +11,7 @@ function writeCheck() {
 		document.write.content.focus();
 		return false;
 	}
-	document.writeForm.submit();
+	
 }
 function addFile(num) {
 	var v = document.getElementById('list_dis');

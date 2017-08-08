@@ -12,6 +12,7 @@
 		<config>src/main/webapp/WEB-INF/spring/user/user-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/admin/admin-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/admin/adminProduct.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/user/userProduct.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/user/userboard.xml</config>

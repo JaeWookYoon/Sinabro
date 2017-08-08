@@ -6,9 +6,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean destroy-method="close" id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="sinabro"/>
-		<property name="password" value="sinabro"/>
+		<property name="url" value="jdbc:oracle:thin:@13.124.142.50:1521:xe"/>
+		<property name="username" value="sinabro717"/>
+		<property name="password" value="sinabro717"/>
 	</bean>
 	<!-- TransactionManager설정 -->
 	

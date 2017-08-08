@@ -40,10 +40,10 @@ public class WriteController {
 	      }
    }
 
-   @RequestMapping(value="writeForm.do",method = RequestMethod.POST)
+   @RequestMapping(value="write.do",method = RequestMethod.POST)
    public ModelAndView onSubmit(HttpServletRequest request, BoardVO boardVo)throws Exception{
       // 글쓰기 DB에 저장
-      System.out.println("일단 왔어");
+      System.out.println("일단 왔어dd");
       ModelAndView model=new ModelAndView();
       HttpSession session=request.getSession(false);
       if(session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {

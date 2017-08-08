@@ -28,17 +28,18 @@ public class ProductAddServiceImpl implements ProductAddService{
 			StringBuilder str=new StringBuilder();
 		for(int i=0;i<imgFile.size();i++) {
 			MultipartFile file=imgFile.get(i);
+			System.out.println(file.getOriginalFilename()+"파일 이름");
 			if(!file.getOriginalFilename().equals("")||!file.getOriginalFilename().equals(null)) {//파일명이 존재할때
 				File dir=new File(uploadPath+"/main/"+vo.getProduct_code());
 				if(!dir.exists()) {//폴더 존재하지 않으면 만들자
 					dir.mkdirs();
 				}else {//존재한다면 싸그리 없애자.
 					if(i==0) {
-						File[]files=dir.listFiles();
+						File []files=dir.listFiles();
 						for(File f:files) {
 							f.delete();
-						}//싹다 지워버린다.
-					}//파일 목록 읽어오기 전에
+						}
+					}
 				}
 			String orgfilename=file.getOriginalFilename();
 			File mainFile=new File(uploadPath+"/main/"+vo.getProduct_code()+"/"+orgfilename);
@@ -48,17 +49,28 @@ public class ProductAddServiceImpl implements ProductAddService{
 			str.append(vo.getProduct_code());
 			str.append("/");
 			str.append(orgfilename);//불러올 경로 지정.
+			str.append(";");
 			//setting
 			vo.setMainImg(str.toString());
-			str.delete(0, str.length());
-			vo.setSizea(vo.getSizeaa().get(i));//사이즈 지정
-			vo.setQuantity(vo.getQuantitya().get(i));//수량 지정
-			result=productDao.addProduct(vo);
-			}//파일명이 존재할때
+			System.out.println(vo.getMainImg());
+			}
 		}//end for
+		StringBuilder size=new StringBuilder();
+		StringBuilder quan=new StringBuilder();
+		for(int i=0;i<vo.getSizeaa().size();i++) {
+			size.append(vo.getSizeaa().get(i));
+			size.append(";");
+			vo.setSizea(size.toString());
+			quan.append(vo.getQuantitya().get(i));
+			quan.append(";");
+			vo.setQuantity(quan.toString());
+		}
+		result=productDao.addProduct(vo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+			
+
 		
 		return result;
 	}

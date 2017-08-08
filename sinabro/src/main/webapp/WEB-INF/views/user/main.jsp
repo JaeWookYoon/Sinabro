@@ -6,9 +6,16 @@
 <script src="/sinabro/js/user/main.js"></script>
 <script>
 window.onunload=function(){
-	
+	var user=navigator.userAgent.toLowerCase();
+	if(user.indextOf('msie')!=-1){
 	outBrowser();
+	}if(user.indexOf('chrome')!=-1){
+		outBrowser();
+	}
+		
+	
 }
+
 </script>
 <div id="wrappermain">
 	<div id="headerLogo">

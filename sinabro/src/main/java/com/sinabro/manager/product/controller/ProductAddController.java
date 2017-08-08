@@ -59,13 +59,14 @@ public class ProductAddController {
 				
 			productService.newProductCode(code);// 제품 코드넣기
 			list.setProduct_code(code);//코드 등록
+			System.out.println(list.getImgFile());
 			int result=productService.addProduct(list, uploadPath);
 			if(result==1) {
 				model.addObject("success", true);
-				model.setViewName("product/productAddForm");
+				model.setViewName("redirect:addProductForm.mustang");
 			}else {
 				model.addObject("fail", true);
-				model.setViewName("product/productAddForm");
+				model.setViewName("redirect:addProductForm.mustang");
 			}//들어 가고나서 확인
 		}
 			

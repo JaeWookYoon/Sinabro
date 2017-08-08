@@ -39,7 +39,7 @@ public class Paging {
 	 */
 
 	public Integer getPage_Start() {
-		return ((currentPage - 1) / pageBlock) * pageBlock + 1;
+		return ((currentPage - 1) / pageBlock) * pageSize + 1;
 	}
 
 	/*

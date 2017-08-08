@@ -106,9 +106,10 @@ window.location="loginForm.do";
 		
 		<br/>
 		<c:if test="${bp.isPre() }">
-		<a href="list.do?pageNum=${bp.getPage_Start()-bp.p_size }">[Previous]</a>
+		<a href="list.do?pageNum=${bp.getPage_Start()-bp.pageBlock }">[Previous]</a>
 		</c:if>
-		<c:forEach var="counter" begin="${bp.getPage_Start() }" end="${bp.getPage_End() }">
+		<c:forEach var="counter" begin="${startPage}" end="${endPage}">
+		
 		<c:if test="${search_text ne ''}">
 		<a href="javascript:window.location='list.do?pageNum=${counter }&search_type=${search_type}&search_text=${search_text}'">
 		[${counter }]</a>
@@ -117,9 +118,10 @@ window.location="loginForm.do";
 		<a id="pageNum" href="javascript:window.location='list.do?pageNum=${counter }'">
 		${counter }</a>
 		</c:if>
+		
 		</c:forEach>
 		<c:if test="${bp.isNext() }">
-		<a href="list.do?pageNum=${bp.getPage_Start()+bp.p_size }">[Next]</a>
+		<a href="list.do?pageNum=${startPage=startPage+bp.pageBlock }">[Next]</a>
 		</c:if>
 		<p><p>
 		<form method="get" name="listForm" action="list.do">

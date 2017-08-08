@@ -52,6 +52,7 @@ public class AddController {
 		vo.setEmail(email); vo.setPhone(phone);
 		
 		
+		
 		int result=addMemberService.addUser(vo);
 		if(result>0) {
 			model.addObject("result",new Integer(1));

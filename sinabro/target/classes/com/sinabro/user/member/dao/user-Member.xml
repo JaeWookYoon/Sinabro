@@ -16,14 +16,16 @@
 		<result property="point" column="POINT" jdbcType="INTEGER"/>
 		<result property="status" column="STATUS" jdbcType="INTEGER"/>
 		<result property="email" column="EMAIL" jdbcType="VARCHAR"/>
+		<result property="gender" column="GENDER" jdbcType="VARCHAR"/>
+		<result property="admin" column="ADMIN" jdbcType="INTEGER"/>
 	</resultMap>
 	<resultMap type="java.lang.String" id="nameResult">
 	</resultMap>
 	
 
 	<insert id="addUser" parameterType="com.sinabro.model.MemberVO">insert into
-		MEMBER(ID,PASSWORD,NAME,PHONE,ZIPCODE,ADDRESS1,ADDRESS2,EMAIL)
-		values(#{id},#{password},#{name},#{phone},#{zipcode},#{address1},#{address2},#{email})
+		MEMBER(ID,PASSWORD,NAME,PHONE,ZIPCODE,ADDRESS1,ADDRESS2,EMAIL,GENDER)
+		values(#{id},#{password},#{name},#{phone},#{zipcode},#{address1},#{address2},#{email},#{gender})
 	</insert>
 
 	<select id="checkId" parameterType="java.lang.String"

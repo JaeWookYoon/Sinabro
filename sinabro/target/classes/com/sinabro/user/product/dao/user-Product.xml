@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinabro.user.product.userProduct">
+<resultMap type="com.sinabro.model.ProductVO" id="productResult">
+<result jdbcType="VARCHAR" column="PRODUCT_CODE" property="product_code"/>
+<result jdbcType="VARCHAR" column="BRAND" property="brand"/>
+<result jdbcType="VARCHAR" column="CATEGORY" property="category"/>
+<result jdbcType="VARCHAR" column="MAINIMG" property="mainImg"/>
+<result jdbcType="VARCHAR" column="NAME" property="name"/>
+<result jdbcType="VARCHAR" column="QUANTITY" property="quantity"/>
+<result jdbcType="VARCHAR" column="SIZEA" property="sizea"/>
+<result jdbcType="INTEGER" column="PRICE" property="price"/>
+<result jdbcType="VARCHAR" column="OPTIONA" property="optiona"/>
+</resultMap>
+<select id="getProductList" resultMap="productResult">
+select * from PRODUCT
+</select>
+<select id="getProductSome" parameterType="java.lang.String" resultMap="productResult">
+select * from PRODUCT where BRAND=#{brand} OR CATEGORY=#{category}
+</select>
+</mapper>

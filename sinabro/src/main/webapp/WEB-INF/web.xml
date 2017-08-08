@@ -40,7 +40,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/user/user-servlet.xml,/WEB-INF/spring/user/usermember.xml
-			/WEB-INF/spring/user/userboard.xml</param-value>
+			/WEB-INF/spring/user/userboard.xml,/WEB-INF/spring/user/userProduct.xml</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>

@@ -7,16 +7,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ProductVO {
 
-	private String product_code="dd";
+	private String product_code;
 	private String brand;
 	private String category;
-	private String mainImg="gd";
+	private String mainImg;
+	
 	private String name;
 	private List<Integer> quantitya;
 	private List<String> sizeaa;
 	private int price;
 	private String sizea;
-	private int quantity;
+	private String quantity;
 	private String optiona;
 	private List<MultipartFile> imgFile;
 	
@@ -36,10 +37,10 @@ public class ProductVO {
 	public void setSizea(String sizea) {
 		this.sizea = sizea;
 	}
-	public int getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 	public List<MultipartFile> getImgFile() {

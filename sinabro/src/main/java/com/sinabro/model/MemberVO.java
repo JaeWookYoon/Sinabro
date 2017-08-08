@@ -14,6 +14,21 @@ public class MemberVO {
 	private int point;
 	private int status;
 	private String email;
+	private String gender;
+	private int admin;
+	
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public int getAdmin() {
+		return admin;
+	}
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
 	public int getStatus() {
 		return status;
 	}
