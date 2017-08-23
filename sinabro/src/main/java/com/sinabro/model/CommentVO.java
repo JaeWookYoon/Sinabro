@@ -5,6 +5,8 @@ public class CommentVO {
 	private String id;
 	private int num;
 	private String content;
+	
+	
 	public int getDnum() {
 		return dnum;
 	}

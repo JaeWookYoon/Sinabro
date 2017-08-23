@@ -1,11 +1,12 @@
 @charset "UTF-8";
-#body{
-	margin-top:5%;
+body{
+	
 		font-family:Calibri;
 		bottom: em;
 		clear:both;
 }
 #left{
+	
 	float:left;
 	padding:10px;
 }

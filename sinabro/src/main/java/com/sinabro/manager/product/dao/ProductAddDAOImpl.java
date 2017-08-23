@@ -1,7 +1,10 @@
 package com.sinabro.manager.product.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.sinabro.model.BrandVO;
 import com.sinabro.model.ProductVO;
 
 public class ProductAddDAOImpl implements ProductAddDAO{
@@ -28,25 +31,39 @@ public class ProductAddDAOImpl implements ProductAddDAO{
 	}
 
 
-	@Override
-	public int newProductCode(String product_code) {
-		// TODO Auto-generated method stub
-		return sqlSessionTemplate.insert(namespace+"newProductCode",product_code);
-	}
-
-
-	@Override
-	public int insertBrand(String brand) {
-		// TODO Auto-generated method stub
-		return sqlSessionTemplate.insert(namespace+"insertBrand",brand);
-	}
-
-
 
 	@Override
 	public int img_SEQ() {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne(namespace+"imgSEQ");
+	}
+
+
+	@Override
+	public List<BrandVO> getBrand() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList(namespace+"getBrand");
+	}
+
+
+	@Override
+	public int insertBrand(BrandVO vo) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.insert(namespace+"insertBrand", vo);
+	}
+
+
+	@Override
+	public int updateBrand(BrandVO vo) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.update(namespace+"updateBrand",vo);
+	}
+
+
+	@Override
+	public int deleteBrand(String brand) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.delete(namespace+"deleteBrand", brand);
 	}
 
 }

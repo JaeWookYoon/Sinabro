@@ -88,10 +88,10 @@ public class CheckMemberServiceImpl implements CheckMemberService {
 		}
 
 	@Override
-	public List<String> getId(String email) {
+	public List<String> getId(Object obj) {
 		// TODO Auto-generated method stub
 		
-		return checkDAO.getId(email);
+		return checkDAO.getId(obj);
 	}
 	@Override
 	public String findPw(String id,String email) {

@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="/sinabro/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/sinabro/js/user/board/script.js"></script>
+<script src="/sinabro/js/user/board/script.js"></script>
+<%@include file="/WEB-INF/views/user/main.jsp"%>
 </head>
 <body>
 <script>
 window.onload=function(){
-getDat();	
+	getDat();
 }
 </script>
 	<div align="center" class="body">
@@ -44,24 +45,20 @@ getDat();
 				</tr>
 			</table>
 			<br /> 
-	<c:if test="${vo.id eq sessionScope.loginId}">
+			<c:if test="${sessionScope.loginId eq vo.id}">
 			<input type="button" value="글수정"
-				onclick="window.location='updateForm.do?num=${vo.num}'" /> 
-				<input
+				onclick="window.location='updateForm.do?num=${vo.num}'" /> <input
 				type="button" value="글삭제"
 				onclick="window.location='deleteProc.do?num=${vo.num}'" /> 
-	</c:if>
+				</c:if>
 				<input
 				type="button" value="목록보기" onclick="window.location='list.do'" />
 		</center>
 	</div>
 	<table id="tr">
-	
 	</table>
-<div id="datwrap">
-	<input type="hidden" name="id" id="logid" value="${sessionScope.loginCheck}"/>
 	<input type="hidden" name="num" id="thisnum" value="${vo.num}"/>
-	<input type="text" name="content" id="content" onkeydown="javascript:if(event.keyCode==13){datInsert()}"/>
-</div>
+	<input type="hidden" name="id" id="logid" value="${sessionScope.loginId}"/>
+	<input type="text" name="content" id="content" onkeypress="if(event.keyCode==13){ insertDat()}"/>
 </body>
 </html>

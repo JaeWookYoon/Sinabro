@@ -30,10 +30,7 @@ public class LoginController {
 	public String getloginForm() {
 		return "member/loginForm";
 	}
-	@RequestMapping(value="/hi.do",method=RequestMethod.GET)
-	public String getMain() {
-		return "member/mainContent";
-	}
+	
 	@RequestMapping(value="/login.do",method=RequestMethod.POST)
 	public ModelAndView getUserInfo(HttpServletRequest request) throws Exception{
 		request.setCharacterEncoding("UTF-8");
@@ -62,13 +59,16 @@ public class LoginController {
 					result=loginService.updateIp(map);
 				}
 				if(result==1) {
+					
 				session.setAttribute("loginCheck", new Integer(1));
-				session.setAttribute("member", vo);
 				session.setAttribute("loginId", vo.getId());
+				session.setAttribute("userSecure",vo.getPassword());
+				session.setAttribute("member", vo);
 				session.setAttribute("loginName", vo.getName());
 				session.setAttribute("point", vo.getPoint());
 				session.setAttribute("sell", vo.getSell());
 				session.setAttribute("memberip", ip);
+				session.setAttribute("admin", vo.getAdmin());
 				//로그인 가능상태
 				
 				model.setViewName("redirect:hi.do");//비번 일치
@@ -95,7 +95,7 @@ public class LoginController {
 		HttpSession session=request.getSession(false);
 		ModelAndView model=new ModelAndView();
 		Map<String,Object>map=new HashMap<String,Object>();
-		if(session.getAttribute("loginId")!=null) {
+		if(session.getId()!=null||session.getAttribute("loginId")!=null) {
 			String id=(String)session.getAttribute("loginId");
 			String ip="0";
 			map.put("id", id);map.put("ip", ip);
@@ -105,7 +105,7 @@ public class LoginController {
 			model.setViewName("redirect:hi.do");
 			}
 		}else {
-			
+			model.setViewName("redirect:hi.do");
 		}
 			return model;
 		

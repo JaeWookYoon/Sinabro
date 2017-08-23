@@ -96,8 +96,11 @@ public class CheckController {
 		String code=request.getParameter("code");
 		if(!session.getAttribute("findName").equals(null)) {
 			if(session.getAttribute("emailCode").equals(code)) {
-			
-				List<String> id=checkService.getId((String)session.getAttribute("findEmail"));
+				System.out.println(session.getAttribute("findName"));
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("email", session.getAttribute("findEmail"));
+			map.put("name", session.getAttribute("findName"));
+				List<String> id=checkService.getId(map);
 				model.addObject("codech", "y");
 				model.addObject("findId", id);
 				model.setViewName("/member/checkCode");

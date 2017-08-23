@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +16,7 @@
 <br><br>
 <form name="productAddForm" method="post" action="addProduct.mustang" enctype="multipart/form-data" onsubmit="return checkList()">
 
-
-       <fieldset>
+	<fieldset class="legend">
        <legend>Admin Page</legend>
        <table id="lista">
        <colgroup>
@@ -32,14 +31,11 @@
       <th><div>Brand</div></th>
       <td ><select name="brand" id="brand" >
 		<option> ----- select a brand  ------</option>
-		<option value="supreme">Supreme</option>
-		<option value="palace">Palace</option>
-		<option value="obey">Obey</option>
-		<option value="stussy">Stussy</option>
-		<option value="a.p.c">A.P.C</option>
-		<option value="neighborhood">Neighborhood</option>
-		<option value="champion">Champion</option>
+		<c:forEach var="vo" items="${list}">
+		<option value="${vo.brand}">${vo.brand}</option>
+		</c:forEach>
 		</select>
+		
 		
 		
         <th colspan="2">Category</th>
@@ -148,32 +144,18 @@
 
 
 
-<fieldset style="margin-top:20px">
-<legend>Product</legend>
+<fieldset>
+<legend class="legend">Product</legend>
 
 
-   <table style="border:solid; text-align:center; border:0; cellpadding:0; cellspacing:0; summary=번호, 사진, 제품명, 수량, 적립금, 가격, 배송비, 취소">
-           
-             
-   <thead>
-         <tr style="background-color:#CCC; font-family:Tahoma, Geneva, sans-serif; font-size:10pt; color:#666; ">
-         <th width="100">Brand</th>
-         <th width="220">Name</th>
-         <th width="220">Name</th>
-         <th width="60">Category</th>
-         <th width="60">Size</th>
-         <th width="60">Quantity</th>
-         <th width="60">Price</th>
-         <th width="60">Option</th>
-   		 </tr>
-    </thead>
-    
-     <tbody>
+   <table style="border:solid; text-align:center; border:0; cellpadding:0; cellspacing:0; summary=번호, 사진, 제품명, 수량, 적립금, 가격, 배송비, 취소">          
+     <tbody >
     <tr>
     <td colspan="8" align="center" >
-    <div class="tb-center p10" style="font-family: 'NanumGothicWeb'; "></div>
+    <div class="tb-center p10"></div>
     </td>
     </tr>
+    
     <tr><td height="10"></td></tr>
      </tbody>
 
@@ -184,8 +166,9 @@
     </table>
 	
 <div id=bottombt>	
-   <input type="submit" class='button'value="submit"/>
-  <input type="reset" class='button' value="cancel"> 
+  <a href="javascript:document.productAddForm.submit()" class="button">submit</a>
+ <a href="#" class="button">cancle</a>
+
 </div>
  
 
@@ -193,6 +176,5 @@
 
 </fieldset>
 </form>
-</center>
 </body>
 </html>

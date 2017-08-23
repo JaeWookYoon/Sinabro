@@ -12,10 +12,54 @@
 <result jdbcType="INTEGER" column="PRICE" property="price"/>
 <result jdbcType="VARCHAR" column="OPTIONA" property="optiona"/>
 </resultMap>
-<select id="getProductList" resultMap="productResult">
-select * from PRODUCT
+<resultMap type="com.sinabro.model.BrandVO" id="brand">
+<result property="brand" column="BRAND" jdbcType="VARCHAR"/>
+<result property="description" column="DESCRIPTION" jdbcType="VARCHAR"/>
+<result property="mainimage" column="MAINIMAGE" jdbcType="VARCHAR"/>
+</resultMap>
+<select id="getProductList"  parameterType="java.util.Map"   resultMap="productResult">
+<![CDATA[select * from (select rownum rnum,product_code,brand,category,mainimg,name,quantity,sizea,price,optiona  from (select * from PRODUCT))
+		where rnum >= #{startRow} and rnum <= #{endRow}]]>
 </select>
-<select id="getProductSome" parameterType="java.lang.String" resultMap="productResult">
-select * from PRODUCT where BRAND=#{brand} OR CATEGORY=#{category}
+<select id="getProductSome" parameterType="java.util.Map" resultMap="productResult">
+<![CDATA[
+		select * from (select rownum rnum, product_code, brand,category, mainimg, name, quantity,sizea,price,optiona from (select * from PRODUCT
+		where BRAND=#{brand} and CATEGORY like #{category}))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+</select>
+<select id="getListCount" resultType="java.lang.Integer">
+select count(*) from PRODUCT
+</select>
+<select id="getListCountBrand" parameterType="java.util.Map" resultType="java.lang.Integer">
+select count(*) from PRODUCT where BRAND=#{brand}
+</select>
+<select id="getListCountCategory" parameterType="java.util.Map" resultType="java.lang.Integer">
+select count(*) from PRODUCT where CATEGORY=#{category}
+</select>
+<select id="getListCountBoth" parameterType="java.util.Map" resultType="java.lang.Integer">
+select count(*) from PRODUCT where BRAND=#{brand} and CATEGORY=#{category}
+</select>
+<select id="getBrand" resultMap="brand">
+select * from BRAND
+</select>
+<select id="getProductContent" parameterType="java.lang.String" resultType="com.sinabro.model.ProductVO">
+select * from PRODUCT where product_code=#{product_code}
+</select>
+<select id="getBrandB" parameterType="java.lang.String" resultType="com.sinabro.model.BrandVO">
+select * from BRAND where brand=#{brand}
+</select>
+<select id="productBrand" parameterType="java.util.Map" resultMap="productResult">
+<![CDATA[
+select * from (select rownum rnum, product_code, brand,category, mainimg, name, quantity,sizea,price,optiona from (select * from PRODUCT
+		where BRAND=#{brand}))
+where rnum >= #{startRow} and rnum <= #{endRow}
+]]>
+</select>
+<select id="productCategory" parameterType="java.util.Map" resultMap="productResult">
+<![CDATA[select * from (select rownum rnum, product_code, brand,category, mainimg, name, quantity,sizea,price,optiona from (select * from PRODUCT
+		where CATEGORY like #{category}))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
 </select>
 </mapper>

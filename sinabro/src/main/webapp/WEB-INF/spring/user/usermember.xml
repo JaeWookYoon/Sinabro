@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
-	<context:component-scan base-package="com.sinabro.user.member.controller" />
+	
 	<bean id="brypt" class="com.sinabro.util.BCrypt"></bean>
 	<bean id="sha256" class="com.sinabro.util.SHA256"></bean>
 	<bean id="loginDAO" class="com.sinabro.user.member.dao.LoginMemberDAOImpl">
@@ -45,36 +45,18 @@
 	<bean id="checkController" class="com.sinabro.user.member.controller.CheckController">
 		<property name="checkService" ref="checkService"></property>
 	</bean>
-
-	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-
-		<property name="host" value="smtp.gmail.com" />
-
-		<property name="port" value="587" />
-
-		<property name="username" value="ekzm126@gmail.com" />
-
-		<property name="password" value="sifzmr5467@" />
-
-
-		
-		<property name="javaMailProperties">
-
-
-			
-			<props>
-
-				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
-
-				<prop key="mail.smtp.starttls.enable">true</prop>
-
-				<prop key="mail.smtp.auth">true</prop>
-
-			</props>
-
-		</property>
-
+	<bean id="changedao" class="com.sinabro.user.member.dao.ChangeDAOImpl">
+	<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	<bean id="changeservice" class="com.sinabro.user.member.service.ChangeServiceImpl">
+	<property name="changeDAO" ref="changedao"></property>
+	</bean>
+	<bean id="changeController" class="com.sinabro.user.member.controller.ChangeController">
+	<property name="changeService" ref="changeservice"></property>
 	</bean>
 	
+	
+	
+
 </beans>
 

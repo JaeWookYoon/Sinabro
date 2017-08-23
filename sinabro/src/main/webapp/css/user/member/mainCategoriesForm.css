@@ -1,8 +1,7 @@
 @charset "UTF-8";
 /* mainCategoriesForm.css */
 .wrap{
-   position:absolute;
-   z-index: 1002;
+   z-index: 2;
 }
 #categories{
    list-style: none;
@@ -29,6 +28,7 @@
    text-decoration: none;
 }
 #categories li a:hover {
+/*    background:#000000; */
    color:#ffffff;
    font-weight: 600;
 }
@@ -37,7 +37,6 @@
    padding:0;
    list-style: none;
    position: absolute;
-   z-index:3;
    left:0;
    top:45px;
    width:150px;
@@ -49,7 +48,7 @@
    opacity: 1;
 }
 #categories ul{
-   z-index: 1003;
+   z-index: 3;
 }
 #categories ul li{
    float:none;

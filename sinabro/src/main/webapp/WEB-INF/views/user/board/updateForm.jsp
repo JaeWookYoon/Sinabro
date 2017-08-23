@@ -5,27 +5,119 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/sinabro/js/user/board/script.js"></script>
+
+<script type="text/javascript" src="/sinabro/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="/sinabro/css/user/board/writeForm.css" />
+
+<style>
+
+.button {
+	align:center;
+	
+	text-decoration:none;
+	font-family:Times New Roman;
+	text-indent:0px;
+	line-height:10px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#353535;
+	width:65px;
+	height:6px;
+	padding:8px;
+	background-color:#F6F6F6;
+	border-color:#bcc1c2;
+	border-width:1px;
+	border-style:solid;
+}
+
+
+
+.button:active {
+	position:relative;
+	top:3px
+}
+
+.button:hover {
+background-color:#EAEAEA;
+}
+
+
+</style>
 <%@include file="/WEB-INF/views/user/main.jsp"%>
 </head>
 
+
+
 <body>
 
-<form method="post" name="writeForm" action="updateForm.do?num=${vo.num}">
-<table width="450" border="1">
+<center>
+<fieldset>
+<form method="post" name="writeForm" action="updateForm.do" enctype="multipart/form-data">
+
+<!--  
+<div id="board">
+<h2>Q & A</h2></div>
+-->
+
+<table width="750" cellpadding="1" cellspacing="0.5">
+
 
 <tr>
-	<td>제목</td>
-	<td><input type="text" size="60" name="subject" value="${vo.subject}"></td>
+ <td>
+ 
+ 
+   <span style="font-family:Tahoma, Geneva, sans-serif; color:#666;">   TITLE  | </span>
+   
+   
+   <input type="text" name="subject" id="subject" value="${vo.subject }" />
+</td>
+ 	
 </tr>
+
 <tr>
-	<td>내용</td>
-	<td><textarea name="content" rows="13" cols="60" >${vo.content}</textarea></td>
+
+   
+   <td colspan="6" >
+   <div id="write">
+   <textarea name="content" id="content" rows="80" cols="100" >${vo.content}</textarea>
+   <script>
+		window.onload=function()
+		{
+		CKEDITOR.replace('content');
+		}
+	</script>
+
+   </div>       
+  </td>
 </tr>
+
+
 </table>
+<br/>
+
 </form>
-<input type="button" value="글수정" onclick="writeCheck()">
-<input type="button" value="목록보기" onclick="window.location='list.do'" />
+
+<div id=Bt>
+<a href="javascript:document.writeForm.submit()" class="button">submit</a>
+
+<a href="javascript:window.location='list.do'" class="button">return list</a>
+</div>
+
+</fieldset>
+
+
+
+
+
+
+
+
+</center>
 
 </body>
 </html>

@@ -2,23 +2,11 @@
 	pageEncoding="UTF-8"%><%@taglib prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html">
-<link rel="stylesheet" href="/sinabro/css/main.css" />
+<link rel="stylesheet" href="/sinabro/css/user/main.css" />
 <script src="/sinabro/js/user/main.js"></script>
 <script src="/sinabro/js/user/footer.js"></script>
 <script src="/sinabro/js/jquery-3.2.1.min.js"></script>
-<script>
-window.onunload=function(){
-	var user=navigator.userAgent.toLowerCase();
-	if(user.indextOf('msie')!=-1){
-	outBrowser();
-	}if(user.indexOf('chrome')!=-1){
-		outBrowser();
-	}
-		
-	
-}
 
-</script>
 <script>
 window.onload=function(){
 	checkStatus();
@@ -26,7 +14,7 @@ window.onload=function(){
 	
 </script>
 
-${sessionScope.asd12}
+
 <div id="wrappermain">
 	<div id="headerLogo">
 		<a href="/sinabro/hi.do">SinaBro</a><br /> <label>Will steal
@@ -52,8 +40,8 @@ ${sessionScope.asd12}
 				<li><a href="#">${sessionScope.loginName}</a></li>
 				<li>Point : ${sessionScope.point}</li>
 
-				<li><a href="/sinabro/cart.do">CART</a></li>
-				<li><a href="#">MY PAGE</a></li>
+				<li><a href="/sinabro/Mycart.do">CART</a></li>
+				<li><a href="/sinabro/Mypage.do">MY PAGE</a></li>
 				<li><a href="/sinabro/logout.do">LOG OUT</a></li>
 			</ul>
 

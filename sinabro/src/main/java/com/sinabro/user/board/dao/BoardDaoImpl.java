@@ -26,8 +26,8 @@ public class BoardDaoImpl implements BoardDao {
 		map = (Map<String, Object>) obj;
 		if (map.get("search_type").equals("all")) {
 			return sqlSessionTemplate.selectList(namespace + "getAllList", obj);
-		} else if (map.get("search_type").equals("writer")) {
-			return sqlSessionTemplate.selectList(namespace + "getWriterList", obj);
+		} else if (map.get("search_type").equals("ID")) {
+			return sqlSessionTemplate.selectList(namespace + "getidList", obj);
 		} else if (map.get("search_type").equals("subject")) {
 			return sqlSessionTemplate.selectList(namespace + "getSubjectList", obj);
 		} else if (map.get("search_type").equals("content")) {
@@ -41,8 +41,8 @@ public class BoardDaoImpl implements BoardDao {
 	public int getListCount(Object obj) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map = (Map<String, Object>) obj;
-		if (map.get("search_type").equals("writer")) {
-			return sqlSessionTemplate.selectOne(namespace + "getWriterCount", obj);
+		if (map.get("search_type").equals("ID")) {
+			return sqlSessionTemplate.selectOne(namespace + "getidCount", obj);
 		} else if (map.get("search_type").equals("subject")) {
 			return sqlSessionTemplate.selectOne(namespace + "getSubjectCount", obj);
 		} else if (map.get("search_type").equals("content")) {

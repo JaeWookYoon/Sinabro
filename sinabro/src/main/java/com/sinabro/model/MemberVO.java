@@ -2,6 +2,12 @@ package com.sinabro.model;
 
 public class MemberVO {
 
+	@Override
+	public String toString() {
+		return "MemberVO [id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone + ", zipcode="
+				+ zipcode + ", address1=" + address1 + ", address2=" + address2 + ", sell=" + sell + ", point=" + point
+				+ ", ip=" + ip + ", email=" + email + ", gender=" + gender + ", admin=" + admin + "]";
+	}
 	private String id;
 	private String password;
 	private String name;

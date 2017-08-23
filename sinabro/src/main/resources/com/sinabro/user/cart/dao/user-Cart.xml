@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bascket">
+<resultMap type="com.sinabro.model.CartVO" id="bascket2">
+<result property="id" column="ID" jdbcType="VARCHAR" ></result>
+<result property="product_code" column="PRODUCT_CODE" jdbcType="VARCHAR" ></result>
+<result property="sizea" column="SIZEA" jdbcType="VARCHAR" ></result>
+</resultMap>
+<resultMap type="com.sinabro.model.ProductVO" id="productResult">
+<result jdbcType="VARCHAR" column="PRODUCT_CODE" property="product_code"/>
+<result jdbcType="VARCHAR" column="BRAND" property="brand"/>
+<result jdbcType="VARCHAR" column="CATEGORY" property="category"/>
+<result jdbcType="VARCHAR" column="MAINIMG" property="mainImg"/>
+<result jdbcType="VARCHAR" column="NAME" property="name"/>
+<result jdbcType="VARCHAR" column="QUANTITY" property="quantity"/>
+<result jdbcType="VARCHAR" column="SIZEA" property="sizea"/>
+<result jdbcType="INTEGER" column="PRICE" property="price"/>
+<result jdbcType="VARCHAR" column="OPTIONA" property="optiona"/>
+</resultMap>
+<insert id="insertCart" parameterType="com.sinabro.model.CartVO">
+insert into CART values(#{id},#{product_code},#{sizea})
+</insert>
+<select id="getCart" parameterType="java.lang.String" resultMap="bascket2">
+select * from CART where ID=#{id}
+</select>
+<select id="getCartList" parameterType="java.lang.String" resultType="com.sinabro.model.ProductVO">
+<![CDATA[
+		select * from PRODUCT where PRODUCT_CODE=#{product_code}
+	]]>
+</select>
+<delete id="deleteCart" parameterType="java.util.Map">
+delete from CART where ID=#{id} and PRODUCT_CODE=#{product_code}
+</delete>
+
+</mapper>

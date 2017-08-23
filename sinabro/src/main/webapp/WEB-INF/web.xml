@@ -43,7 +43,9 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/user/user-servlet.xml,/WEB-INF/spring/user/usermember.xml
-			/WEB-INF/spring/user/userboard.xml,/WEB-INF/spring/user/userProduct.xml</param-value>
+			/WEB-INF/spring/user/userboard.xml,/WEB-INF/spring/user/userProduct.xml,/WEB-INF/spring/user/userPage.xml
+			/WEB-INF/spring/user/userPayment.xml,/WEB-INF/spring/user/userCart.xml,/WEB-INF/spring/user/used.xml
+			/WEB-INF/spring/user/userCertify.xml</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
@@ -58,7 +60,8 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/admin/admin-servlet.xml,/WEB-INF/spring/admin/adminProduct.xml</param-value>
+			<param-value>/WEB-INF/spring/admin/admin-servlet.xml,/WEB-INF/spring/admin/adminProduct.xml
+			,/WEB-INF/spring/admin/adminmember.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

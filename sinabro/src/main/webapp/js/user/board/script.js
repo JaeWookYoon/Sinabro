@@ -64,7 +64,7 @@ function insertDat(){
 	})
 }
 function getDat(){
-	
+		
 		$.getJSON("/sinabro/getDat.do?num="+$("#thisnum").val(), function(data){
 			console.log(data.list.length);
 			var str="";
@@ -80,4 +80,18 @@ function getDat(){
 			$("#tr").html(str);//테이블에 적용
 		});
 	
+}
+function updateCheck(){
+
+	if (document.writeForm.subject.value == "") {
+		alert("제목을 입력해 주세요");
+		document.write.subject.focus();
+		return;
+	}
+	if (document.writeForm.content.value == "") {
+		alert("내용을 입력해 주세요");
+		document.write.content.focus();
+		return;
+	}
+	document.writeForm.submit();
 }

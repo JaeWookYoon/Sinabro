@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="userpageDAO" class="com.sinabro.user.page.dao.UserPageDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+</bean>
+<bean id="userpageService" class="com.sinabro.user.page.service.UserPageServiceImpl">
+<property name="userPagedao" ref="userpageDAO"></property>
+</bean>
+<bean id="userPageController" class="com.sinabro.user.page.controller.UserPageController">
+<property name="userPageService" ref="userpageService"></property>
+</bean>
+
+
+
+
+
+</beans>

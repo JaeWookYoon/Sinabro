@@ -6,7 +6,7 @@
 	/* 	margin-left: 20%;; */
 	margin-right: auto; 
 	margin-left: auto;
-	padding-top: 20px;
+	padding-top: 100px;
 	padding-bottom: 150px;
 	font-family: Calibri;
 	position : relative;
@@ -29,8 +29,8 @@ th {
 }
 
 #logTotalForm {
-	padding-top: 10%;
-	padding-bottom: 4%;
+	padding-top: 8%;
+	padding-bottom: 3%;
 	float: center;
 	/* 	margin-left: auto; */
 	/* 	margin-right: auto;	 */
@@ -49,17 +49,21 @@ th {
 	width: 150px;
 	color: #BDBDBD;
 }
+#table2{
+	padding-left: 9%;
+}
 
 #bt {
 	border-radius: 1px;
 	border: none;
-	width: 70px;
-	height: 47px;
+	width: 72px;
+	height: 50px;
 	text-align: center;
 	background-color: #BDBDBD;
 	float: right;
 	font-size: 10px;
-	color: #5D5D5D;
+	color: #5D5D5D;	
+	
 }
 
 #join1 a, #join2 a {
@@ -69,7 +73,7 @@ th {
 
 #findForm {
 	margin-top: auto;
-	margin-bottom: 5%;
+	margin-bottom: 8%;
 	margin-left: auto;
 	margin-right: auto;
 	width: 30%;

@@ -5,8 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%@include file="/WEB-INF/views/user/main.jsp"%>
 </head>
 <body>
+<div>
 <input type="hidden" name="codech" value="n"/>
 <c:choose>
 <c:when test="${codeId==1}">
@@ -39,5 +41,6 @@ ${id}
 </c:when>
 </c:choose>
 <a href="/sinabro/hi.do">메인으로</a>
+</div>
 </body>
 </html>

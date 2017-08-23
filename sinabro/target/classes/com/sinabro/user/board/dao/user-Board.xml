@@ -62,7 +62,7 @@
 	<!-- List(목록보기) : 검색(id)-->
 	<select id="getidList" parameterType="java.util.Map" resultMap="BoardResult">
 		<![CDATA[
-		select * from (select rownum rnum, num, id, pass, email, subject, content, regdate, readcount from (select * from BOARD
+		select * from (select rownum rnum, num, id, subject, content, regdate, readcount from (select * from BOARD
 		where id=#{search_text} order by num desc))
 		where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>

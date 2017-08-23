@@ -11,20 +11,78 @@
 <result property="sizea" column="SIZEA" jdbcType="VARCHAR"/>
 <result property="price" column="PRICE" jdbcType="VARCHAR"/>
 </resultMap>
+<resultMap type="com.sinabro.model.BrandVO" id="brandVO">
+<result property="brand" column="BRAND" jdbcType="VARCHAR"/>
+<result property="description" column="DESCRIPTION" jdbcType="VARCHAR"/>
+<result property="mainimage" column="MAINIMAGE" jdbcType="VARCHAR"/>
+</resultMap>
 <insert id="addProduct" parameterType="com.sinabro.model.ProductVO">
-insert into PRODUCT values(#{product_code},#{brand},#{category},#{mainImg},#{name},#{quantity},#{sizea},#{price},#{optiona})
+insert into PRODUCT values(#{product_code},#{brand},#{category},#{mainImg},#{name},#{quantity},#{sizea},#{price},#{optiona},sysdate)
 </insert>
 <select id="checkBrand" parameterType="java.lang.String" resultType="java.lang.Integer">
 select count(*) from BRAND where brand=#{brand}
 </select>
-<insert id="newProductCode" parameterType="java.lang.String">
-insert into PRODUCT_CODE values(#{product_code})
-</insert>
-<insert id="insertBrand" parameterType="java.lang.String">
-insert into Brand values(#{brand})
-</insert>
 
-<select id="imgSEQ">
-select IMG_SEQ.nextval from dual
+<insert id="insertBrand" parameterType="com.sinabro.model.BrandVO">
+insert into Brand values(#{brand},#{description},#{mainimage})
+</insert>
+<update id="updateBrand" parameterType="com.sinabro.model.BrandVO">
+update BRAND set description=#{description},mainimage=#{mainimage} where brand=#{brand}
+</update>
+<select id="getBrand" resultMap="brandVO">
+select * from BRAND
 </select>
+<delete id="deleteBrand" parameterType="java.lang.String">
+delete from BRAND where BRAND=#{brand}
+</delete>
+
+<select id="getProductList"  parameterType="java.util.Map"   resultMap="productVO">
+<![CDATA[select * from (select rownum rnum,product_code,brand,category,mainimg,name,quantity,sizea,price,optiona  from (select * from PRODUCT))
+		where rnum >= #{startRow} and rnum <= #{endRow}]]>
+</select>
+<select id="getProductSome" parameterType="java.util.Map" resultMap="productVO">
+<![CDATA[
+		select * from (select rownum rnum, product_code, brand,category, mainimg, name, quantity,sizea,price,optiona from (select * from PRODUCT
+		where BRAND=#{brand} and CATEGORY like #{category}))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+</select>
+<select id="getListCount" resultType="java.lang.Integer">
+select count(*) from PRODUCT
+</select>
+<select id="getListCountBrand" parameterType="java.util.Map" resultType="java.lang.Integer">
+select count(*) from PRODUCT where BRAND=#{brand}
+</select>
+<select id="getListCountCategory" parameterType="java.util.Map" resultType="java.lang.Integer">
+select count(*) from PRODUCT where CATEGORY=#{category}
+</select>
+<select id="getListCountBoth" parameterType="java.util.Map" resultType="java.lang.Integer">
+select count(*) from PRODUCT where BRAND=#{brand} and CATEGORY=#{category}
+</select>
+
+<select id="getProductContent" parameterType="java.lang.String" resultType="com.sinabro.model.ProductVO">
+select * from PRODUCT where product_code=#{product_code}
+</select>
+<select id="getBrandB" parameterType="java.lang.String" resultType="com.sinabro.model.BrandVO">
+select * from BRAND where brand=#{brand}
+</select>
+<select id="productBrand" parameterType="java.util.Map" resultMap="productVO">
+<![CDATA[
+select * from (select rownum rnum, product_code, brand,category, mainimg, name, quantity,sizea,price,optiona from (select * from PRODUCT
+		where BRAND=#{brand}))
+where rnum >= #{startRow} and rnum <= #{endRow}
+]]>
+</select>
+<select id="productCategory" parameterType="java.util.Map" resultMap="productVO">
+<![CDATA[select * from (select rownum rnum, product_code, brand,category, mainimg, name, quantity,sizea,price,optiona from (select * from PRODUCT
+		where CATEGORY like #{category}))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+</select>
+<update id="updateProduct" parameterType="com.sinabro.model.ProductVO">
+update PRODUCT set MAINIMG=#{mainImg},SIZEA=#{sizea},QUANTITY=#{quantity},PRICE=#{price},NAME=#{name},OPTIONA=#{optiona} where PRODUCT_CODE=#{product_code}
+</update>
+<delete id="deleteProduct" parameterType="java.lang.String">
+delete from PRODUCT where PRODUCT_CODE=#{product_code}
+</delete>
 </mapper>

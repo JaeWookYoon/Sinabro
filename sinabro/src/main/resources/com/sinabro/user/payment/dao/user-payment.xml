@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.sinabro.user.payment.dao.user-payment">
+<select id="getProductOrder" parameterType="java.lang.String" resultType="com.sinabro.model.ProductVO">
+select * from PRODUCT where PRODUCT_CODE=#{product_code}
+</select>
+<select id="getMember" parameterType="java.lang.String" resultType="com.sinabro.model.MemberVO">
+select * from MEMBER where ID=#{id}
+</select>
+</mapper>

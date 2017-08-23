@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinabro.user.page.user-page">
+
+		<resultMap type="com.sinabro.model.BoardVO" id="BoardResult">
+			<result property="num" column="NUM" jdbcType="BIGINT" />
+			<result property="id" column="ID" jdbcType="VARCHAR" />
+			<result property="subject" column="SUBJECT" jdbcType="VARCHAR" />
+			<result property="readcount" column="READCOUNT" jdbcType="BIGINT" />
+			<result property="regdate" column="REGDATE" jdbcType="TIMESTAMP" />
+			<result property="content" column="CONTENT" jdbcType="VARCHAR" />
+		</resultMap>
+	<select id="getMyboard" parameterType="java.util.Map"    resultMap="BoardResult">
+	<![CDATA[select * from (select rownum rnum, num, id, subject, content, regdate, readcount from (select * from BOARD where ID=#{id} order by num desc))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	<select id="getMycount" parameterType="java.lang.String" resultType="java.lang.Integer">
+	select count(*) from BOARD where ID=#{id}
+	</select>	
+
+		
+</mapper>

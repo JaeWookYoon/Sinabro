@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="certifyDAO" class="com.sinabro.user.certify.dao.CertifyDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+</bean>
+<bean id="certifyService" class="com.sinabro.user.certify.service.CertifyServiceImpl">
+<property name="certifyDAO" ref="certifyDAO"></property>
+<property name="javaMailSender" ref="javaMailSender"></property>
+</bean>
+<bean id="certifyController" class="com.sinabro.user.certify.controller.CertifyController">
+<property name="certifyService" ref="certifyService"></property>
+</bean>
+
+</beans>

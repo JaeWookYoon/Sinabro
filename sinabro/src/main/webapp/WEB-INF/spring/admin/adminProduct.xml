@@ -12,5 +12,13 @@
 <bean id="productController" class="com.sinabro.manager.product.controller.ProductAddController">
 <property name="productService" ref="productService"/>
 </bean>
-
+<bean id="managerProductDAO" class="com.sinabro.manager.product.dao.ManagerProductDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+</bean>
+<bean id="managerProductService" class="com.sinabro.manager.product.service.ManagerProductServiceImpl">
+<property name="managerProductDAO" ref="managerProductDAO"></property>
+</bean>
+<bean id="managerProductController" class="com.sinabro.manager.product.controller.ManagerProductController">
+<property name="managerProductService" ref="managerProductService"></property>
+</bean>
 </beans>

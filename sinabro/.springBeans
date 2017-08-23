@@ -13,9 +13,15 @@
 		<config>src/main/webapp/WEB-INF/spring/admin/admin-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/admin/adminProduct.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/user/userProduct.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/user/userCart.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/user/userPage.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/user/userCertify.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring/admin/adminmember.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/user/userboard.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/user/userPayment.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/user/used.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +28,7 @@ public class WriteController {
    @RequestMapping(value = "writeForm.do",method = RequestMethod.GET)
    public ModelAndView setView(HttpServletRequest request) {
      
-	   System.out.println("일단 왔어");
+	   
 	      ModelAndView model=new ModelAndView();
 	      HttpSession session=request.getSession(false);
 	      if(session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {
@@ -40,10 +41,11 @@ public class WriteController {
 	      }
    }
 
-   @RequestMapping(value="write.do",method = RequestMethod.POST)
+   @RequestMapping(value="/write.do",method = RequestMethod.POST)
    public ModelAndView onSubmit(HttpServletRequest request, BoardVO boardVo)throws Exception{
       // 글쓰기 DB에 저장
       System.out.println("일단 왔어dd");
+      System.out.println(request.getParameter("content"));
       ModelAndView model=new ModelAndView();
       HttpSession session=request.getSession(false);
       if(session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {
@@ -51,6 +53,7 @@ public class WriteController {
     	  model.setViewName("board/list");
     	  return model;
       }else {
+    	  System.out.println(boardVo.getContent()+"글입니다.");
     	  boardVo.setId((String)session.getAttribute("loginId"));
       this.writeService.insertWriting(boardVo);
       model.setViewName("redirect:/list.do");

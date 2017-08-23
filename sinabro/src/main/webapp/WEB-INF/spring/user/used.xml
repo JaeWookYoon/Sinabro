@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd">
+
+	<!-- Dao -->
+
+	<bean id="usedboardDao" class="com.sinabro.user.usedboard.dao.UsedBoardDaoImpl">
+		<property name="sqlSessionTemplate">
+			<ref bean="sqlSessionTemplate" />
+		</property>
+	</bean>
+
+	<!-- paging 처리 -->
+	<bean id="usedboardPaging" class="com.sinabro.util.Paging" />
+	<!-- 서비스 처리 -->
+	<bean id="usedboardListService"
+		class="com.sinabro.user.usedboard.service.UsedBoardListServiceImpl"
+		p:usedBoardDao-ref="usedboardDao" />
+
+	<!-- Controller -->
+	<!-- List 화면 -->
+	<bean id="UsedListController"
+		class="com.sinabro.user.usedboard.controller.UsedListController"
+		p:usedBoardListService-ref="usedboardListService"
+		p:usedboardPaging-ref="usedboardPaging" />
+
+	<!-- 글쓰기 화면 -->
+	<bean id="UsedBoardWriteController"
+		class="com.sinabro.user.usedboard.controller.UsedWriteController"
+		p:usedWriteService-ref="usedwriteService" />
+
+	<!-- 글보기 화면 -->
+	<bean id="UsedBoardGetArticleController"
+		class="com.sinabro.user.usedboard.controller.UsedGetArticleController"
+		p:usedGetArticleService-ref="usedgetArticleService" />
+
+	<!-- 글수정 화면 -->
+	<bean id="UsedBoardUpdateArticleController"
+		class="com.sinabro.user.usedboard.controller.UsedUpdateArticleController"
+		p:usedUpdateArticleService-ref="usedupdateArticleService" />
+	<!-- 글삭제 -->
+	<bean id="UsedBoardDeleteArticleController"
+		class="com.sinabro.user.usedboard.controller.UsedDeleteArticleController"
+		p:useddeleteArticleService-ref="useddeleteArticleService" />
+
+
+	<bean id="usedwriteService" class="com.sinabro.user.usedboard.service.UsedWriteServiceImpl"
+		p:usedBoardDao-ref="usedboardDao" />
+
+	<bean id="usedgetArticleService"
+		class="com.sinabro.user.usedboard.service.UsedGetArticleServiceImpl"
+		p:usedBoardDao-ref="usedboardDao" />
+
+	<bean id="usedupdateArticleService"
+		class="com.sinabro.user.usedboard.service.UsedUpdateArticleServiceImpl"
+		p:usedBoardDao-ref="usedboardDao" />
+
+	<bean id="useddeleteArticleService"
+		class="com.sinabro.user.usedboard.service.UsedDeleteArticleServiceImpl"
+		p:usedBoardDao-ref="usedboardDao" />
+
+<bean id="usedDatDAO" class="com.sinabro.user.usedboard.dao.UsedDatDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+</bean>
+<bean id="usedDatService" class="com.sinabro.user.usedboard.service.UsedDatServiceImpl">
+<property name="usedDatDAO" ref="usedDatDAO"></property>
+</bean>
+<bean id="usedDatController" class="com.sinabro.user.usedboard.controller.UsedDatController">
+<property name="usedDatService" ref="usedDatService"></property>
+</bean>
+
+
+
+</beans>

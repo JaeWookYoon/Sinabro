@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--DAO에 인터페이스 경로 -->
+<mapper namespace="com.sinabro.member.adminMember">
+
+	<resultMap type="com.sinabro.model.MemberVO" id="MemberResult">
+		<result property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="name" column="NAME" jdbcType="VARCHAR" />
+		<result property="phone" column="PHONE" jdbcType="VARCHAR" />
+		<result property="zipcode" column="ZIPCODE" jdbcType="INTEGER" />
+		<result property="address1" column="ADDRESS1" jdbcType="VARCHAR" />
+		<result property="point" column="POINT" jdbcType="INTEGER" />
+		<result property="email" column="EMAIL" jdbcType="VARCHAR" />
+		<result property="admin" column="ADMIN" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap type="java.lang.String" id="nameResult">
+	</resultMap>
+
+	<!-- 로그인 -->
+	<select id="getAdminInfo" parameterType="java.lang.String"
+		resultType="com.sinabro.model.MemberVO">
+		select * from MEMBER where id=#{id}
+	</select>
+	<!-- 관리자 추가 -->
+	<insert id="addAdmin" parameterType="com.sinabro.model.MemberVO">insert into
+		MEMBER(ID,PASSWORD,NAME,PHONE,ZIPCODE,ADDRESS1,ADDRESS2,EMAIL,ADMIN,GENDER)
+		values(#{id},#{password},#{name},#{phone},#{zipcode},#{address1},#{address2},#{email},#{admin},#{gender})
+	</insert>
+	<!-- 아이디 중복 체크 -->
+	<select id="adminCheckId" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select id from member where ID=#{id}
+	</select>
+
+	<!-- user count -->
+	<select id="getUserCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from MEMBER
+		where admin=0 and (id=#{search_text} or name like '%'||#{search_text}||'%') 
+	</select>
+	
+	<!-- 회원목록 가져오기 -->
+	<select id="userList" parameterType="java.util.Map" resultMap="MemberResult">
+		<![CDATA[select * from (select rownum rnum, id, name, phone, address1, point, email, admin from (select * from MEMBER))
+		where admin=0 and rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+
+	<!-- admin count -->
+	<select id="getAdminCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from MEMBER
+		where admin=1 and (id=#{search_text} or name like '%'||#{search_text}||'%') 
+	</select>
+	
+	<!-- 관리자목록 가져오기 -->
+	<select id="adminList" parameterType="java.util.Map" resultMap="MemberResult">
+		<![CDATA[select * from (select rownum rnum, id, name, phone, address1, point, email, admin from (select * from MEMBER))
+		where admin=1 and rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<select id="getUserIdCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from MEMBER where admin=0 and (ID = #{search_text})
+	</select>
+	
+	<select id="getAdminIdCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from MEMBER where admin=1 and (ID = #{search_text})
+	</select>
+	
+	<select id="getUserNameCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from MEMBER where admin=0 and (NAME = #{search_text})
+	</select>
+	
+	<select id="getAdminNameCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from MEMBER where admin=1 and (NAME = #{search_text})
+	</select>
+	
+	<select id="getUserAllCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from MEMBER where admin=0 and (ID = #{search_text} or NAME like '%' || #{search_text}||'%')
+	</select>
+	
+	<select id="getAdminAllCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from MEMBER where admin=1 and (ID = #{search_text} or NAME like '%' || #{search_text}||'%')
+	</select>
+	
+	<select id="getUserIdList" parameterType="java.util.Map" resultMap="MemberResult">
+		<![CDATA[
+		select * from (select rownum rnum, id, name, phone, address1, point, email, admin from (select * from MEMBER
+		where admin=0 and (id=#{search_text})))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<select id="getAdminIdList" parameterType="java.util.Map" resultMap="MemberResult">
+		<![CDATA[
+		select * from (select rownum rnum, id, name, phone, address1, point, email, admin from (select * from MEMBER
+		where admin=1 and (id=#{search_text})))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<select id="getUserNameList" parameterType="java.util.Map" resultMap="MemberResult">
+		<![CDATA[
+		select * from (select rownum rnum, id, name, phone, address1, point, email, admin from (select * from MEMBER
+		where admin=0 and (name=#{search_text})))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<select id="getAdminNameList" parameterType="java.util.Map" resultMap="MemberResult">
+		<![CDATA[
+		select * from (select rownum rnum, id, name, phone, address1, point, email, admin from (select * from MEMBER
+		where admin=1 and (name=#{search_text})))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<select id="getUserAllList" parameterType="java.util.Map" resultMap="MemberResult">
+		<![CDATA[
+		select * from (select rownum rnum, id, name, phone, address1, point, email, admin from (select * from MEMBER
+		where admin=0 and (id=#{search_text} or name like '%'||#{search_text}||'%')))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<select id="getAdminAllList" parameterType="java.util.Map" resultMap="MemberResult">
+		<![CDATA[
+		select * from (select rownum rnum, id, name, phone, address1, point, email, admin from (select * from MEMBER
+		where admin=1 and (id=#{search_text} or name like '%'||#{search_text}||'%')))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<select id="getUserInformation" parameterType="java.lang.String" resultType="com.sinabro.model.MemberVO">
+		select * from MEMBER where id=#{id}
+	</select>
+	
+	<delete id="deleteUserInformation" parameterType="java.lang.String">
+		delete from MEMBER where id = #{id}
+	</delete>
+	
+	<update id="updateUserInformation" parameterType="com.sinabro.model.MemberVO">
+		update MEMBER set phone=#{phone}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2},
+		 point=#{point}, email=#{email}, admin=#{admin} where id=#{id} 
+	</update>
+	
+	
+	<select id="getAdminInformation" parameterType="java.lang.String" resultType="com.sinabro.model.MemberVO">
+		select * from MEMBER where id=#{id}
+	</select>
+	
+	<delete id="deleteAdminInformation" parameterType="java.lang.String">
+		delete from MEMBER where id = #{id}
+	</delete>
+	
+	<update id="updateAdminInformation" parameterType="com.sinabro.model.MemberVO">
+		update MEMBER set phone=#{phone}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2},
+		 point=#{point}, email=#{email}, admin=#{admin} where id=#{id} 
+	</update>
+	
+	<update id="updateIp" parameterType="java.util.Map">
+	update MEMBER set IP=#{ip} where ID=#{id}
+	</update>
+	
+	<update id="deleteIp" parameterType="java.util.Map">
+	update MEMBER set IP=#{ip} where ID=#{id}
+	</update>
+	<select id="checkIp" parameterType="java.lang.String" resultType="java.lang.String">
+	select IP from MEMBER where ID=#{id}
+	</select>
+	
+</mapper>

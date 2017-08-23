@@ -1,0 +1,166 @@
+@charset "UTF-8";
+#payment {
+	width: 100%;
+}
+
+th {
+	font-size: 10pt;
+}
+
+#li_1 {
+	width: 65px;
+}
+
+#li_2 {
+	width: 550px;
+	text-align: center;
+}
+
+#li_3, #li_4, #li_5 {
+	width: 100px;
+}
+
+#img {
+	width: 65px;
+	/* 	height: 65px; */
+}
+
+#productsName {
+	width: 550px;
+	/* 	height: 28px; */
+}
+
+#quantity, #price, #milage {
+	width: 100px;
+	/* 	height: 28px; */
+}
+
+#name {
+	width: 110px;
+}
+
+#email {
+	width: 170px;
+}
+
+#phoneone {
+	width: 55px;
+}
+
+#phonetwo {
+	width: 65px;
+}
+#phonethree {
+	width: 65px;
+}
+
+.order {
+	margin-top: 7%;
+}
+
+.customer {
+	margin-top: 7%;
+}
+
+.shipping {
+	margin-top: 7%;
+}
+
+.milage {
+	margin-top: 7%;
+}
+
+#customer1 {
+	margin-left: 2%;
+	width: 50%;
+}
+
+#shipping1 {
+	width: 50%;
+}
+
+#zipcode {
+	width: 100px;
+}
+
+#address1 {
+	width: 210px;
+}
+
+#address2 {
+	width: 210px;
+}
+
+#customer1 td {
+	padding: 3% 3% 3% 3%;
+	height: 3%;
+}
+
+#shipping1 td {
+	padding: 3% 3% 3% 3%;
+	height: 3%;
+}
+
+#milage1 td {
+	width: 50px;
+	font-size: 10pt;
+}
+
+#milage1 {
+	/* border-style:solid; */
+	width: 60%;
+	padding-left: 0;
+}
+
+#milage1 li {
+	list-style: none;
+	font-size: 10pt;
+}
+
+#useMilage {
+	width: 90px;
+}
+p{
+font-weight:bold; font-size:24pt
+}
+.button {
+   align:center;
+   
+   text-decoration:none;
+   font-family:Times New Roman;
+   text-indent:0px;
+   line-height:10px;
+   -moz-border-radius:0px;
+   -webkit-border-radius:0px;
+   border-radius:0px;
+   text-align:center;
+   vertical-align:middle;
+   display:inline-block;
+   font-size:16px;
+   color:#353535;
+   width:80px;
+   height:6px;
+   padding:8px;
+   background-color:#F6F6F6;
+   border-color:#bcc1c2;
+   border-width:1px;
+   border-style:solid;
+}
+
+
+
+.button:active {
+   position:relative;
+   top:3px
+}
+
+.button:hover {
+background-color:#EAEAEA;
+}
+
+
+.ocBt{
+		margin-top: 5%;
+		margin-bottom: 5%;
+}
+

@@ -26,8 +26,8 @@ public class CheckMemberDAOImpl implements CheckMemberDAO{
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList(namespace+"findId", name);
 	}
-	public List<String> getId(String email) {
-		return sqlSessionTemplate.selectList(namespace+"getId",email);
+	public List<String> getId(Object obj) {
+		return sqlSessionTemplate.selectList(namespace+"getId",obj);
 	}
 
 	@Override

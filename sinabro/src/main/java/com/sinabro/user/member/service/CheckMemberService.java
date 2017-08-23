@@ -6,7 +6,7 @@ public interface CheckMemberService {
 
 	boolean checkId(String id);
 	String findId(String name,String email);
-	List<String> getId(String email);
+	List<String> getId(Object obj);
 	String findPw(String id,String email);
 	String changPw(String id);
 }

@@ -1,0 +1,40 @@
+@charset "UTF-8";
+.button {
+	align:center;
+	
+	text-decoration:none;
+	font-family:Times New Roman;
+	text-indent:0px;
+	line-height:10px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#353535;
+	width:65px;
+	height:6px;
+	padding:8px;
+	background-color:#F6F6F6;
+	border-color:#bcc1c2;
+	border-width:1px;
+	border-style:solid;
+}
+
+.button:active {
+	position:relative;
+	top:3px
+}
+
+.button:hover {
+background-color:#EAEAEA;
+}
+#inputForm{
+	
+	list-style:none;
+}
+.brandinput{
+	width:180px;
+}

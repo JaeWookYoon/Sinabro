@@ -39,7 +39,7 @@ public class ListController {
 
    @RequestMapping(value = "list.do", method = RequestMethod.GET)
    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-      request.setCharacterEncoding("utf-8");
+      request.setCharacterEncoding("euc-kr");
       String pageNum = request.getParameter("pageNum");
       if (pageNum == null || pageNum == "") {
          pageNum = "1";
@@ -49,11 +49,10 @@ public class ListController {
       int pagenavi = 5;
       String search_type = request.getParameter("search_type");
       String search_text = request.getParameter("search_text");
-      if (search_text != null)
-         search_text = new String(search_text.getBytes("8859_1"), "utf-8");
+     
       System.out.println(search_text);
       if (search_type == null) {
-         search_type = "";
+         search_type = "all";
       }
       if (search_text == null) {
          search_text = "";
@@ -62,6 +61,7 @@ public class ListController {
       map.put("search_type", search_type);
       map.put("search_text", search_text);
       int count = this.boardListService.getListCount(map);
+      System.out.println(count+"글 숫자");
       boardPaging.setPaging(pageSize, pagenavi, count, currentPage);
       int number = count - (currentPage - 1) * pageSize;
       int startPage=boardPaging.getPage_Start();
@@ -73,6 +73,7 @@ public class ListController {
       map.put("startRow", boardPaging.getWriting_Start());
       map.put("endRow", boardPaging.getWriting_End());
       List<BoardVO> boardList = this.boardListService.getBoardList(map);
+      System.out.println(boardList+"의 글");
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("boardList", boardList);
       model.put("count", count);

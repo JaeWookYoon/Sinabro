@@ -39,7 +39,7 @@
 	select distinct EMAIL from MEMBER where NAME=#{name}
 	</select>
 	<select id="getId" parameterType="java.lang.String" resultMap="nameResult">
-	select distinct ID from MEMBER where EMAIL=#{email}
+	select ID from MEMBER where EMAIL=#{email} and NAME=#{name}
 	</select>
 	<select id="findPw" parameterType="java.lang.String" resultType="java.lang.String">
 	select EMAIL from MEMBER where ID=#{id}
@@ -56,5 +56,7 @@
 	<select id="checkIp" parameterType="java.lang.String" resultType="java.lang.String">
 	select IP from MEMBER where ID=#{id}
 	</select>
-	
+	<update id="updateMember" parameterType="com.sinabro.model.MemberVO">
+	update MEMBER set PASSWORD=#{password},PHONE=#{phone},EMAIL=#{email},ZIPCODE=#{zipcode},ADDRESS1=#{address1},ADDRESS2=#{address2} where ID=#{id}
+	</update>
 </mapper>

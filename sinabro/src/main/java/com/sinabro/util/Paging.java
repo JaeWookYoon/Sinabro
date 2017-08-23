@@ -29,7 +29,7 @@ public class Paging {
 	 */
 
 	public Integer getPage_Count() {
-		return (count / pageSize) + (count % pageSize > 0 ? 1 : 0);
+		return (count / pageSize) + (count % pageSize == 0 ? 0 : 1);
 	}
 
 	/*
@@ -39,7 +39,7 @@ public class Paging {
 	 */
 
 	public Integer getPage_Start() {
-		return ((currentPage - 1) / pageBlock) * pageSize + 1;
+		return (int)((currentPage-1)/pageBlock)*pageBlock+1;
 	}
 
 	/*

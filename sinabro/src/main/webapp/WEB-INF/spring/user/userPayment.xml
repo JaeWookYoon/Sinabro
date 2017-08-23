@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="paymentDAO" class="com.sinabro.user.payment.dao.PaymentDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+</bean>
+<bean id="paymentService" class="com.sinabro.user.payment.service.PaymentServiceImpl">
+<property name="paymentDAO" ref="paymentDAO"></property>
+</bean>
+
+<bean id="paymentController" class="com.sinabro.user.payment.controller.PaymentController">
+<property name="paymentService" ref="paymentService"></property>
+</bean>
+
+
+
+</beans>

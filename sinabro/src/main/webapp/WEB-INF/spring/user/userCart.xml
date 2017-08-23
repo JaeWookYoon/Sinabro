@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="cartListDAO" class="com.sinabro.user.cart.dao.CartListDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+</bean>
+<bean id="cartListService" class="com.sinabro.user.cart.service.CartListServiceImpl">
+<property name="cartDAO" ref="cartListDAO"/>
+</bean>
+<bean id="cartListController" class="com.sinabro.user.cart.controller.CartListController">
+<property name="cartService" ref="cartListService"/>
+</bean>
+
+</beans>
