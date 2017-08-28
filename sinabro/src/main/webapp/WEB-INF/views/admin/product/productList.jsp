@@ -176,5 +176,5 @@ ul li{
 </div>
 
 </body>
-<%@include file="/WEB-INF/views/user/footer.jsp"%>
+
 </html>

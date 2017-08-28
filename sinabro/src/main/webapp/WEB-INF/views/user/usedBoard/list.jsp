@@ -8,9 +8,87 @@
 <title>Insert title here</title>
 <!-- 
 <link rel="stylesheet" href="/sinabro/css/user/board/list.css">-->
-<link rel="stylesheet" href="/sinabro/css/user/usedboard/list.css"/>
 <%@include file="/WEB-INF/views/user/main.jsp"%>
 
+<style>
+body{
+font-size:10pt; color:#898989; padding:0 0 0 0; margin:0 0 0 0;
+
+margin-left:20%;
+margin-right:20%;
+position:relative;
+}
+
+#write{
+text-align:left;
+}
+#list{
+text-align:right;
+}
+
+#search{
+text-align:right;
+}
+.button {
+	align:center;
+	
+	text-decoration:none;
+	font-family:Times New Roman;
+	text-indent:0px;
+	line-height:10px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#353535;
+	width:65px;
+	height:6px;
+	padding:8px;
+	background-color:#F6F6F6;
+	border-color:#bcc1c2;
+	border-width:1px;
+	border-style:solid;
+}
+
+.button:active {
+	position:relative;
+	top:3px
+}
+
+.button:hover {
+background-color:#EAEAEA;
+}
+
+#wrapper{
+	
+}
+
+
+
+#bottom{
+	width:900px; 
+	text-align:center; 
+	font-size:12pt; 
+	color:#999;  
+	padding-top:60px; 
+	padding-bottom:60px;
+	font-family:NanumGothicWeb;
+	
+}
+
+#bottominner{
+margin-top: 5px;
+ font-family:NanumGothicWeb;
+ color:#999; 
+ }
+ #centerwrap{
+ border:1px solid;
+ text-align: center;
+ }
+</style>
 
 
 <script type="text/javascript">
@@ -87,6 +165,7 @@ window.location="loginForm.do";
 						<b>${vo.id }</b></td>
 					<td align="center">${vo.regdate }</td>
 					<td align="center">${vo.readcount }</td>
+				
 				</tr>
 			</c:forEach>
 		</c:if>

@@ -13,7 +13,7 @@
 
 <body>
 
-<br><br>
+<div>
 <form name="productAddForm" method="post" action="addProduct.mustang" enctype="multipart/form-data" onsubmit="return checkList()">
 
 	<fieldset class="legend">
@@ -57,7 +57,7 @@
  <tr>					
       <th ><div>size</div></th>
       <td colspan="2">
-      <ul id="sizeList">
+      <ul id="sizeList" class="productAdd">
       <li><select name="sizeaa" id="sizea" style="height:23px;">
 		<option> ------ select a Size  -------</option>
 		<option value="S">Small</option>
@@ -97,7 +97,7 @@
        <tr>						<!-- 상품이미지파일 첨부 -->
        <th>Image</th>
        <td colspan="4">
-      <ul id="fileList">
+      <ul id="fileList" class="productAdd">
         <li>
        <input id='file' type='file' class='image' name='imgFile' value='search' onfocus='' accept="image/jpg,img/gif,image/png" required="required"/> 
         <a href="javascript:plusfile()" class="button">add</a>
@@ -109,7 +109,7 @@
        <tr>
         <th><div>Quantity</div></th>
        <td>
-       <ul id="quanList">
+       <ul id="quanList" class="productAdd">
        <li><input id="unit" type="number"  min="0"  step="1" name="quantitya" onkeypress="controlNum(event)" required="required"/>
        </li>
        </ul>
@@ -176,5 +176,6 @@
 
 </fieldset>
 </form>
+</div>
 </body>
 </html>

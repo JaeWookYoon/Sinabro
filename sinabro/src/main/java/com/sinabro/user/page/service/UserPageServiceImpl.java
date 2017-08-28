@@ -25,6 +25,12 @@ public class UserPageServiceImpl implements UserPageService{
 		this.userPagedao = userPagedao;
 	}
 
+	@Override
+	public MemberVO getMemberInfo(String id) {
+		// TODO Auto-generated method stub
+		return userPagedao.getMemberInfo(id);
+	}
+
 	
 
 }

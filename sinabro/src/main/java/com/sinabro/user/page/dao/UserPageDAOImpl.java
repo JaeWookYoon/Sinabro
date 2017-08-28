@@ -27,6 +27,12 @@ public class UserPageDAOImpl implements UserPageDAO{
 		return sqlSessionTemplate.selectOne(namespace+"getMycount",id);
 	}
 
+	@Override
+	public MemberVO getMemberInfo(String id) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne(namespace+"getMemberInfo", id);
+	}
+
 	
 	
 

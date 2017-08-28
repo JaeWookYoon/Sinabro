@@ -4,5 +4,5 @@ import com.sinabro.model.UsedBoardVO;
 
 public interface UsedWriteService {
 
-	void insertWriting(UsedBoardVO UsedBoardVo);
+	void insertWriting(UsedBoardVO UsedBoardVo, String uploadPath);
 }

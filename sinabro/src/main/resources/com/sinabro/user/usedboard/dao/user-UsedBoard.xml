@@ -16,14 +16,16 @@
 		<result property="transaction" column="TRANSACTION" jdbcType="VARCHAR"/>
 		<result property="mainimg" column="MAINIMG" jdbcType="VARCHAR"/>
 	</resultMap>
-	
-	<resultMap type="com.sinabro.model.CommentVO" id="commentResult">
-	<result property="dnum" column="DNUM" jdbcType="INTEGER"/>
-	<result property="num" column="NUM" jdbcType="INTEGER"/>
-	<result property="id" column="ID" jdbcType="VARCHAR"/>
-	<result property="content" column="CONTENT" jdbcType="VARCHAR"/>
-	</resultMap>
+<resultMap id="commentResult" type="com.sinabro.model.CommentVO">
 
+<result jdbcType="INTEGER" column="DNUM" property="dnum"/>
+
+<result jdbcType="INTEGER" column="NUM" property="num"/>
+
+<result jdbcType="VARCHAR" column="ID" property="id"/>
+
+<result jdbcType="VARCHAR" column="CONTENT" property="content"/>	
+</resultMap>
 	<!-- 전체 글 수 : 검색(All) -->
 	<select id="getAllCount" parameterType="java.util.Map" resultType="Integer">
 	<![CDATA[
@@ -94,7 +96,7 @@
 	<!-- 글쓰기 -->
 	<insert id="insertArticle" parameterType="com.sinabro.model.UsedBoardVO">
 		<![CDATA[
-		insert into USED_BOARD(num, id, subject, content, price, transaction) values(USED_BOARD_SEQ.nextval,#{id},#{subject},#{content},#{price},#{transaction})
+		insert into USED_BOARD(num, id, subject, content, price, transaction, mainimg) values(USED_BOARD_SEQ.nextval,#{id},#{subject},#{content},#{price},#{transaction},#{mainimg})
 		]]>
 	</insert>
 	<!-- 글보기 -->
@@ -114,7 +116,7 @@
 	<!-- 글 수정 -->
 	<update id="updateArticle" parameterType="com.sinabro.model.UsedBoardVO">
 		<![CDATA[
-		update USED_BOARD set subject=#{subject}, content=#{content}, price=#{price}, transaction=#{transaction} where num =#{num}]]>
+		update USED_BOARD set subject=#{subject}, content=#{content}, price=#{price}, transaction=#{transaction}, mainimg=#{mainimg} where num =#{num}]]>
 	</update>	
 	
 	<!-- 글 삭제 -->
@@ -123,12 +125,9 @@
 		delete from USED_BOARD where num =#{num}
 		]]>
 	</delete>	
+	<select id="getUsedComment" parameterType="java.lang.Integer" resultMap="commentResult"> select * from USED_DATGUL where NUM=#{num} </select>
 
-	<select id="getUsedComment" parameterType="java.lang.Integer" resultMap="commentResult">
-	select * from USED_DATGUL where NUM=#{num}
-	</select>
-	<insert id="insertUsedComment" parameterType="com.sinabro.model.CommentVO">
-	insert into USED_DATGUL values(USED_DAT_SEQ.nextval,#{num},#{id},#{content})
-	</insert>
+<insert id="insertUsedComment" parameterType="com.sinabro.model.CommentVO"> insert into USED_DATGUL values(USED_DAT_SEQ.nextval,#{num},#{id},#{content}) </insert>
+	
 	
 </mapper>

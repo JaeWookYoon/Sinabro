@@ -9,4 +9,5 @@ public interface CheckMemberService {
 	List<String> getId(Object obj);
 	String findPw(String id,String email);
 	String changPw(String id);
+	int getPoint(String id);
 }

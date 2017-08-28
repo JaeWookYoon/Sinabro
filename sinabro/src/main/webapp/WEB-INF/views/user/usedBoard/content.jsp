@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,12 +44,18 @@ window.onload=function(){
 				<tr>
 					<td align="center">제목</td>
 					<td colspan="7" align="left">${vo.subject}</td>
-					
 				</tr>
 				<tr>
 					<td align="center">내용</td>
 					<td colspan="7" align="left" height="100"><pre>${vo.content}</pre></td>
 				</tr>
+					<c:forEach var="i" items="${img }">
+				<tr>
+					<td align="center">이미지</td>
+					<td colspan="7" align="left" height="100">
+					<img src="/sinabro${i}" /></td>
+				</tr>
+					</c:forEach>
 			</table>
 			<br /> 
 			<c:if test="${sessionScope.loginId eq vo.id}">
@@ -62,10 +69,9 @@ window.onload=function(){
 		</center>
 	</div>
 	<table id="tr">
-	
 	</table>
 	<input type="hidden" name="num" id="thisnum" value="${vo.num}"/>
-	
+	<input type="hidden" name="id" id="logid" value="${sessionScope.loginId}"/>
 	<input type="text" name="content" id="content" onkeypress="if(event.keyCode==13){ insertDat()}"/>
 </body>
 </html>

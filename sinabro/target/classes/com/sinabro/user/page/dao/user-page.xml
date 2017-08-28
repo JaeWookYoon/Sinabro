@@ -18,6 +18,8 @@
 	<select id="getMycount" parameterType="java.lang.String" resultType="java.lang.Integer">
 	select count(*) from BOARD where ID=#{id}
 	</select>	
-
+	<select id="getMemberInfo" parameterType="java.lang.String" resultType="com.sinabro.model.MemberVO">
+	select * from MEMBER where ID=#{id}
+	</select>
 		
 </mapper>

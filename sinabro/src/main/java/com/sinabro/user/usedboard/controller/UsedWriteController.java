@@ -1,5 +1,9 @@
 package com.sinabro.user.usedboard.controller;
 
+import java.io.File;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,47 +19,49 @@ import com.sinabro.user.usedboard.service.UsedWriteService;
 public class UsedWriteController {
 
 	private UsedWriteService usedWriteService;
-   
-   
 
-   public void setUsedWriteService(UsedWriteService usedWriteService) {
-	this.usedWriteService = usedWriteService;
-}
+	public void setUsedWriteService(UsedWriteService usedWriteService) {
+		this.usedWriteService = usedWriteService;
+	}
 
-@RequestMapping(value = "usedwriteForm.do",method = RequestMethod.GET)
-   public ModelAndView setView(HttpServletRequest request) {
-     
-	   
-	      ModelAndView model=new ModelAndView();
-	      HttpSession session=request.getSession(false);
-	      if(session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {
-	    	  model.addObject("check", false);
-	    	  model.setViewName("usedBoard/list");
-	    	  return model;
-	      }else {
-	    	  model.setViewName("usedBoard/writeForm");
-	    	  return model;
-	      }
-   }
+	@RequestMapping(value = "usedwriteForm.do", method = RequestMethod.GET)
+	public ModelAndView setView(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView();
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute("loginId") == null || session.getAttribute("loginId").equals(null)) {
+			model.addObject("check", false);
+			model.setViewName("usedBoard/list");
+			return model;
+		} else {
+			model.setViewName("usedBoard/writeForm");
+			return model;
+		}
+	}
 
-   @RequestMapping(value="/usedwrite.do",method = RequestMethod.POST)
-   public ModelAndView onSubmit(HttpServletRequest request, UsedBoardVO usedBoardVo)throws Exception{
-      // 글쓰기 DB에 저장
-      System.out.println("일단 왔어dd");
-      System.out.println(request.getParameter("content"));
-      ModelAndView model=new ModelAndView();
-      HttpSession session=request.getSession(false);
-      if(session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {
-    	  model.addObject("check", false);
-    	  model.setViewName("usedBoard/list");
-    	  return model;
-      }else {
-    	  System.out.println(usedBoardVo.getContent()+"글입니다.");
-    	  usedBoardVo.setId((String)session.getAttribute("loginId"));
-      this.usedWriteService.insertWriting(usedBoardVo);
-      model.setViewName("redirect:/usedlist.do");
-      return model;
-      }
-   }
-   
+	@RequestMapping(value = "/usedwrite.do", method = RequestMethod.POST)
+	public ModelAndView onSubmit(HttpServletRequest request, UsedBoardVO usedBoardVo) throws Exception {
+		// 글쓰기 DB에 저장
+		
+		System.out.println("일단 왔어dd");
+		System.out.println(request.getParameter("content"));
+		String uploadPath = "no";
+		ModelAndView model = new ModelAndView();
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute("loginId") == null || session.getAttribute("loginId").equals(null)) {
+			model.addObject("check", false);
+			model.setViewName("usedBoard/list");
+			return model;
+		} else {
+
+			uploadPath = request.getRealPath("/images/used");
+
+			System.out.println(uploadPath);
+			System.out.println(usedBoardVo.getContent() + "글입니다.");
+			usedBoardVo.setId((String) session.getAttribute("loginId"));
+			this.usedWriteService.insertWriting(usedBoardVo, uploadPath);
+			model.setViewName("redirect:/usedlist.do");
+			return model;
+		}
+	}
+
 }

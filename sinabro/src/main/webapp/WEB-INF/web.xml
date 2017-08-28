@@ -45,7 +45,7 @@
 			<param-value>/WEB-INF/spring/user/user-servlet.xml,/WEB-INF/spring/user/usermember.xml
 			/WEB-INF/spring/user/userboard.xml,/WEB-INF/spring/user/userProduct.xml,/WEB-INF/spring/user/userPage.xml
 			/WEB-INF/spring/user/userPayment.xml,/WEB-INF/spring/user/userCart.xml,/WEB-INF/spring/user/used.xml
-			/WEB-INF/spring/user/userCertify.xml</param-value>
+			/WEB-INF/spring/user/userCertify.xml,/WEB-INF/spring/user/userQna.xml</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>

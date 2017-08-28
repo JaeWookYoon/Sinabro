@@ -1,15 +1,22 @@
 @charset "UTF-8";
 
-#wrapper{
-	width:930px; 
-	margin:0 auto; 
+body{
+	width:1000px;
+	margin:auto; 
 	padding-top:20px;
+	clear:both;
+}
+
+
+#wrappercart{
+	border:1px solid red;
+	
 }
 
 
 
 #cartfoot{
-	width:900px; 
+	width:60%; 
 	text-align:center; 
 	font-size:12pt; 
 	color:#999;  

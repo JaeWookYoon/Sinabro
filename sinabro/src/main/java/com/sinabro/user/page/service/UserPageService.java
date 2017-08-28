@@ -8,5 +8,5 @@ import com.sinabro.model.MemberVO;
 public interface UserPageService {
 	List<BoardVO> getMyboard(Object obj);
 	int getMycount(String id);
-	
+	MemberVO getMemberInfo(String id);
 }

@@ -3,10 +3,61 @@
 
 
 <mapper namespace="com.sinabro.user.payment.dao.user-payment">
+
+<resultMap type="com.sinabro.model.PaymentVO" id="paymentResult">
+<result property="num" column="NUM" jdbcType="BIGINT" />
+<result property="id" column="ID" jdbcType="VARCHAR" />
+<result property="datea" column="DATEA" jdbcType="DATE" />
+<result property="order_code" column="ORDER_CODE" jdbcType="VARCHAR" />
+<result property="status" column="STATUS" jdbcType="VARCHAR" />
+<result property="address" column="ADDRESS" jdbcType="VARCHAR" />
+<result property="order_message" column="ORDER_MESSAGE" jdbcType="VARCHAR" />
+<result property="sizea" column="SIZEA" jdbcType="VARCHAR" />
+<result property="price" column="PRICE" jdbcType="BIGINT" />
+<result property="product_code" column="PRODUCT_CODE" jdbcType="VARCHAR" />
+<result property="nameone" column="NAMEONE" jdbcType="VARCHAR" />
+<result property="total" column="TOTAL" jdbcType="BIGINT" />
+</resultMap>
+
 <select id="getProductOrder" parameterType="java.lang.String" resultType="com.sinabro.model.ProductVO">
 select * from PRODUCT where PRODUCT_CODE=#{product_code}
 </select>
 <select id="getMember" parameterType="java.lang.String" resultType="com.sinabro.model.MemberVO">
 select * from MEMBER where ID=#{id}
 </select>
+
+<select id="getSize" parameterType="java.lang.String" resultType="java.lang.String">
+select SIZEA from PRODUCT where PRODUCT_CODE=#{product_code}
+</select>
+<select id="getQuan" parameterType="java.lang.String" resultType="java.lang.String">
+select QUANTITY from PRODUCT where PRODUCT_CODE=#{product_code}
+</select>
+
+<delete id="deleteCartOne" parameterType="java.util.Map">
+delete from CART where ID=#{id} and PRODUCT_CODE=#{product_code}
+</delete>
+
+<update id="reduceQuan" parameterType="java.util.Map">
+update PRODUCT set QUANTITY=#{quantity} where PRODUCT_CODE=#{product_code}
+</update>
+
+<update id="updateMilage" parameterType="java.util.Map">
+update MEMBER set POINT=POINT+#{milage} where ID=#{id}
+</update>
+
+<insert id="insertPayment">
+insert into PAYMENT values(PAYMENT_SEQ.nextval,#{id},#{product_code},sysdate,#{price},#{order_code},#{status},#{address},#{order_message},#{sizea},#{nameone},#{total})
+</insert>
+<select id="getUserMilage" parameterType="java.lang.String" resultType="java.lang.Integer">
+select POINT from MEMBER where ID=#{id}
+</select>
+<select id="getCompleInfo" parameterType="java.lang.String" resultMap="paymentResult">
+select * from PAYMENT where ID=#{id}
+</select>
+<select id="getProductImg" parameterType="java.lang.String" resultType="java.lang.String">
+select MAINIMG from PRODUCT where PRODUCT_CODE=#{product_code}
+</select>
+<update id="reduceMilage" parameterType="java.util.Map">
+update MEMBER set POINT=POINT-#{milage} where ID=#{id}
+</update>
 </mapper>

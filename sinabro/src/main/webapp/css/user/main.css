@@ -2,18 +2,23 @@
 
 body {
 	color: black;
-	margin-left:10%;
-	margin-right:10%;
+	margin-left:auto;
+	margin-right:auto;
 	position:relative;
 	clear:both;
 	font-family:Calibri; 
 	margin-bottom: 20%;
-	width:930px;
+	width:1000px;
 	}
 
+#point{
+border:none;
+text-align:center;
+}
 a {text-decoration: none;}
 #wrappermain{
 	margin-bottom: 10%;
+	position:static;
 }
 #headerLogo{
 	text-align: center;

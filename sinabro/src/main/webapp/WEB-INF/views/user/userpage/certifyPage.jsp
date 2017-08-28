@@ -8,6 +8,7 @@
 <%@include file="/WEB-INF/views/user/main.jsp"%>
 <script src="/sinabro/js/jquery-3.2.1.min.js"></script>
 <script src="/sinabro/js/user/userpage/certify.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script>
 </head>
 <c:if test="${fail}">
 <script>

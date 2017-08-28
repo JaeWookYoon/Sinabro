@@ -153,7 +153,31 @@ public class CheckController {
 		return model;
 		
 	}
-	
+	@RequestMapping(value="getPoint.do")
+	public ResponseEntity<Map<String,Object>>getPoint(HttpServletRequest request){
+		ResponseEntity<Map<String,Object>>entity=null;
+		Map<String,Object> map=new HashMap<String,Object>();
+		HttpSession session=request.getSession(false);
+		try {
+		if(session.getId()==null||session.getId().equals(null)||session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {
+			map.put("fail", true);
+			entity=new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
+		}else {
+			String id=(String)session.getValue("loginId");
+			int pointa = checkService.getPoint(id);
+			String point="Point :"+pointa;
+			map.put("success", true);
+			map.put("point", point);
+			entity=new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity=new ResponseEntity<Map<String,Object>>(HttpStatus.OK);
+		}
+		return entity;
+	}
+			
+			
 	
 	public void setCheckService(CheckMemberService checkService) {
 		this.checkService = checkService;

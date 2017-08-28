@@ -26,7 +26,7 @@
 					</tr>
 					<tr>
 						<th>아이디</th>
-						<td><input id="id" type="text" name="id" readonly="readonly" onfocus="idCheck()"/>&nbsp;
+						<td><input id="id" type="text" name="id" readonly="readonly"/>&nbsp;
 						<input id="idBt" type="button" value="중복확인" onclick="idCheck()" />
 						
 						

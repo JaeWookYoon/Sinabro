@@ -19,7 +19,7 @@
 <script>
 	$(document).ready(function() {
 		var slider = $('.bxslider').bxSlider({
-			auto : false,
+			auto : true,
 			mode : 'fade',
 		});
 		// 클릭시 멈춤 현상 해결 //

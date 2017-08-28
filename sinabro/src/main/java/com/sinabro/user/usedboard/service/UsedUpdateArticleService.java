@@ -7,5 +7,5 @@ public interface UsedUpdateArticleService {
 	UsedBoardVO getArticle(Integer num);
 
 
-	void updateArticle(UsedBoardVO UsedBoardVo);
+	void updateArticle(UsedBoardVO UsedBoardVo, String uploadPath);
 }

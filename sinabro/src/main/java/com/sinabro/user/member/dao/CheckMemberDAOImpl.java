@@ -41,6 +41,12 @@ public class CheckMemberDAOImpl implements CheckMemberDAO{
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.update(namespace+"changePw", obj);
 	}
+
+	@Override
+	public int getPoint(String id) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne(namespace+"getPoint", id);
+	}
 	
 
 }

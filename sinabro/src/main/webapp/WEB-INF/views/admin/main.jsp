@@ -1,20 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+   pageEncoding="UTF-8"%><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <script src="/sinabro/js/admin/product/productAddForm.js"></script>
 <script src="/sinabro/js/admin/main.js"></script>
 <link rel="stylesheet" href="/sinabro/css/admin/main.css" />
 <script>
 window.onload=function(){
-	checkStatus();
+   checkStatus();
 }
 </script>
 <style>
 
-body{
-margin-left:10%;
-margin-right:10%
-}
+
 
 </style>
 
@@ -24,41 +21,41 @@ margin-right:10%
 
 <body>
 
-		
+      
 <div id="wrappermain">
-	<div id="headerLogo">
-	
-		<a href="/sinabro/hi.mustang"><label>SinaBro</label></a><br /> <div style="text-align:center"><label>Will steal
-			ur wallet, hommy</label><br>
-			<label>Adiministrator Mode</label></div>
-	</div>	
+   <div id="headerLogo">
+   
+      <a href="/sinabro/hi.mustang"><label>SinaBro</label></a><br /> <div style="text-align:center"><label>Will steal
+         ur wallet, hommy</label><br>
+         <label>Adiministrator Mode</label></div>
+   </div>   
 </div>
-	
-	
+   
+   
 
 <div>
 <table style="width:928px; list-style: none;">
-	<tr>
-	<td colspan="4" style="text-align:right" >
-	<ul id="topMenuwrap">
-				<li><a href="/sinabro/loginForm.mustang"> LOGIN / </a></li>
-				<li><a href="/sinabro/regForm.mustang"> JOIN</a></li>
-			</ul>
- 	</td>
-	</tr>
-	</table>
+   <tr>
+   <td colspan="4" style="text-align:right" >
+   <ul id="topMenuwrap">
+            <li><a href="/sinabro/loginForm.mustang"> LOGIN / </a></li>
+            <li><a href="/sinabro/regForm.mustang"> JOIN</a></li>
+         </ul>
+    </td>
+   </tr>
+   </table>
 </div>
 
-	
+   
 <!-- 회원관리 -->
 <div style="width:928px; margin:0 auto; padding-bottom:45px;" class="main1">
 <div class="maind" >
   <div class="mainbb">회원관리</div>
   <div class="cont0">
  
-     		
+           
  <ul >
-<li><a href="#"><div>회원검색</div></a></li>
+
 <li><a href="/sinabro/userList.mustang"><div>회원목록</div></a></li>
 <li><a href="/sinabro/regForm.mustang"><div>관리자등록</div></a></li>
 <li><a href="/sinabro/adminList.mustang"><div>관리자목록</div></a></li>
@@ -66,7 +63,7 @@ margin-right:10%
 </ul>
 </div></div>
 
-		
+      
 
 <div class="maind">
   <div class="mainbb">상품관리</div>
@@ -104,7 +101,7 @@ margin-right:10%
 </ul>
 </div></div></div>
 
-			
-				
-				
-	</body>
+         
+            
+            
+   </body>

@@ -9,4 +9,5 @@ public interface CheckMemberDAO {
 	public List<String> getId(Object obj);
 	public String findPw(String id);
 	int changePw(Object obj);
+	int getPoint(String id);
 }

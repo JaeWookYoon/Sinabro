@@ -65,7 +65,7 @@ public class CartListController {
 		ModelAndView model=new ModelAndView();
 		HttpSession session=request.getSession(false);
 		if(session.getId().equals(null)||session.getId()==null||session.getAttribute("loginId").equals(null)||session.getAttribute("loginId")==null) {
-			model.setViewName("member/loginForm");
+			model.setViewName("redirect:loginForm.do");
 		}else {
 			String id=(String)session.getValue("loginId");
 			List<ProductVO> list=new ArrayList<ProductVO>();
@@ -79,6 +79,7 @@ public class CartListController {
 				String [] imgs=product.split(";");
 				list.get(i).setSizea(cart.get(i).getSizea());
 				list.get(i).setMainImg(imgs[0]);
+				
 			}
 			model.addObject("cart", list);
 			model.addObject("count", list.size());

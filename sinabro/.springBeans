@@ -16,6 +16,7 @@
 		<config>src/main/webapp/WEB-INF/spring/user/userCart.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/user/userPage.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/user/userCertify.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/user/userQna.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/admin/adminmember.xml</config>

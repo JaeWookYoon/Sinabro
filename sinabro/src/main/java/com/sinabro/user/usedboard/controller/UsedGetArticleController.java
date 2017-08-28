@@ -25,10 +25,14 @@ public class UsedGetArticleController {//기사불러오기
 	public ModelAndView getArticle(Integer num){
 		UsedBoardVO usedBoardVo = this.usedGetArticleService.getArticle(num);
 		Map<String,Object> model = new HashMap<String,Object>();
+		String[] img;
+		img = usedBoardVo.getMainimg().split(";");
+		model.put("img", img);
 		model.put("vo",usedBoardVo);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("usedBoard/content");
 		mav.addAllObjects(model);
+		
 		return mav;
 	}
 }

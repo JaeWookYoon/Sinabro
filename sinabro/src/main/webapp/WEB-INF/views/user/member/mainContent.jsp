@@ -9,6 +9,8 @@
 
 <link rel="stylesheet" href="/sinabro/css/user/main/mainContent.css" />
 
+
+
 </head>
 
 <body>
@@ -17,60 +19,51 @@
 <%@include file="/WEB-INF/views/user/slide.jsp"%>
 
 
-	
-	
+   
+   
 
 
 
 
 
 
+<div id="mainWrapper">
+<div id="mainList">
 
-<!-- 메인 상품리스트 -->
-<div id="tableName">
-<br/>
-<div id="leftTableName"><a href="#"></a>LATEST</div>
-<div id="rightTableName"><a href="#"></a>BEST</div>
-<br/><br/>
-</div>
-<div id="productsList">
-<hr>
-<div id="table">
-<table id="mainProductsList" >
-<tr>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/1.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/2.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/3.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/4.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/5.jpg"></a></td>
-</tr>
-<tr>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/6.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/7.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/8.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/9.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/10.jpg"></a></td>
-</tr>
-<tr>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/11.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/12.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/13.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/14.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/15.jpg"></a></td>
-</tr>
-<tr>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/16.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/17.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/18.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/19.jpg"></a></td>
-<td><a href="#"><img id="mainProducts" src="/sinabro/images/20.jpg"></a></td>
-</tr>
+
+<table>
+
+<c:set var="cnt" value="0"/>
+   <c:forEach var="vo" items="${list}">
+   <c:if test="${cnt%5==0}">
+   <tr>
+   </c:if>
+   <td style="line-padding:20" ><ul><li><input  style=" width:120px;height:120px;" type="image" src="/sinabro${vo.mainImg}" onclick="javascript:window.location='productContent.do?product_code=${vo.product_code}'"/></li><li><a href="productContent.do?product_code=${vo.product_code}">${vo.name}</a></li><li><a class="price" href="productContent.do?product_code=${vo.product_code}">&#8361;${vo.price}</a></li></ul></td>
+   <c:set var="cnt" value="${cnt=cnt+1}"/>
+   <c:if test="${cnt%5==0}">
+   </tr>
+   </c:if>
+   </c:forEach>
 </table>
-</div>
-<hr/>
-</div>
 
+<div style="text-align:center;color:black;">
+<c:if test="${pre}">
+      <a href="hi.do?pageNum=${startPage-pageBlock}">[Previous]</a>
+      </c:if>
+      <c:forEach var="counter" begin="${startPage}" end="${endPage}">
+      
+      
+      <a id="pageNum" href="javascript:window.location='hi.do?pageNum=${counter }'">
+      ${counter}</a>
+      
+      </c:forEach>
+      <c:if test="${post}">
+      <a href="hi.do?pageNum=${startPage+pageBlock}">[Next]</a>
+      </c:if>
 
+</div>
+</div>
+</div>
 <%@include file="/WEB-INF/views/user/footer.jsp"%>
 
 </body>

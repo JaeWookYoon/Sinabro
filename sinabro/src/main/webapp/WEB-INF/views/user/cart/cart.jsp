@@ -15,18 +15,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-
-
-
 <%@include file="/WEB-INF/views/user/userpage/myPageTab.jsp"%>
+<body>
+<c:if test="${nop}">
+<script>
+alert("보유 카트가 없어요.");
+</script>
+</c:if>
+
+
+
+
+
+
 <div id="wrappercart">
-
-
-
 <div id="cart">
 <form name="cartForm" method="post" action="orderForm.do">
-   <table style="text-align: center;"width="900" border="0" cellpadding="1" cellspacing="0" summary="번호, 사진, 제품명, 수량, 적립금, 가격, 배송비, 취소">
+   <table style="text-align: center;"width="80%" border="0" cellpadding="1" cellspacing="0" summary="번호, 사진, 제품명, 수량, 적립금, 가격, 배송비, 취소">
            
              
    <thead>
@@ -74,4 +79,5 @@
                
 
 </body>
+<%@include file="/WEB-INF/views/user/footer.jsp"%>
 </html>

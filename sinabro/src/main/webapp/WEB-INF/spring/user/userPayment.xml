@@ -2,6 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
 <bean id="paymentDAO" class="com.sinabro.user.payment.dao.PaymentDAOImpl">
 <property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
 </bean>
@@ -13,6 +16,25 @@
 <property name="paymentService" ref="paymentService"></property>
 </bean>
 
+<bean id="orderDAO" class="com.sinabro.user.payment.dao.PaymentOrderDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+</bean>
 
+<bean id="orderService" class="com.sinabro.user.payment.service.PaymentOrderServiceImpl">
+<property name="paymentOrderDAO" ref="orderDAO"></property>
+</bean>
 
+<bean id="orderController" class="com.sinabro.user.payment.controller.PaymentOrderController">
+<property name="paymentOrderService" ref="orderService"></property>
+</bean>
+
+<bean id="myPaymentDAO" class="com.sinabro.user.payment.dao.MyPaymentDAOImpl">
+<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+</bean>
+<bean id="myPaymentService" class="com.sinabro.user.payment.service.MyPaymentServiceImpl">
+<property name="myPaymentDAO" ref="myPaymentDAO"></property>
+</bean>
+<bean id="myPaymentController" class="com.sinabro.user.payment.controller.MyPaymentController">
+<property name="myPaymentService" ref="myPaymentService"></property>
+</bean>
 </beans>

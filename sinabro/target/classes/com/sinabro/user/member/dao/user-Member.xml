@@ -59,4 +59,7 @@
 	<update id="updateMember" parameterType="com.sinabro.model.MemberVO">
 	update MEMBER set PASSWORD=#{password},PHONE=#{phone},EMAIL=#{email},ZIPCODE=#{zipcode},ADDRESS1=#{address1},ADDRESS2=#{address2} where ID=#{id}
 	</update>
-</mapper>
+	<select id="getPoint" parameterType="java.lang.String" resultType="java.lang.Integer">
+	select POINT from MEMBER where ID=#{id}
+	</select>
+</mapper> 

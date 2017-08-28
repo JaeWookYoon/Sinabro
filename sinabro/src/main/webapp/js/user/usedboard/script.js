@@ -13,6 +13,8 @@ function writeCheck() {
 	}
 	
 }
+
+
 function addFile(num) {
 	var v = document.getElementById('list_dis');
 	if (num == "b") {
@@ -34,12 +36,13 @@ function datInsert(){
 	}
 }
 function insertDat(){
+	
 	$.ajax({
 		url:"insertUsedDat.do",
 		type: "POST",
 		dataType:'json',
 		data:JSON.stringify({
-			
+			"id":$("#logid").val(),
 			"num":$("#thisnum").val(),
 			"content":$("#content").val()
 		}),
@@ -65,15 +68,13 @@ function insertDat(){
 }
 function getDat(){
 		
-		$.getJSON("/sinabro//getUsedBoardDat.do?num="+$("#thisnum").val(), function(data){
+		$.getJSON("/sinabro/getUsedBoardDat.do?num="+$("#thisnum").val(), function(data){
 			console.log(data.list.length);
 			var str="";
 			var	tr="";
 			var td1="";
 			var td2="";
-		
 			$(data.list).each(function(){//받아온 댓글 리스트를 foreach문으로 돌린다.
-				
 			
 				str += "<tr class='list' data-rno='"+this.dnum+"'><td>" + this.id + " : " + "</td><td class='content'>"+ this.content +"</td><td><button>수정/삭제</button></td></tr>";
 				//str이 모든 값을 저장하고 마지막에 table에 html로 삽입됨.

@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+input{
+	border:none;
+	text-align:center;
+	font-size: 8pt;
+}
+#img{
+	width:65px;
+	height:65px;
+}
+#paidTable{
+	border:1px solid black;
+	padding:0;
+	width:800px;
+}
+#paidTable tr td{
+	padding-right:0;
+	margin-right:0;
+}

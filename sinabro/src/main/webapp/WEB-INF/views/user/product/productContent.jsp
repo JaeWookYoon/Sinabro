@@ -61,7 +61,7 @@
       document.getElementById("defaultOpen").click();   
    });
 </script>
-<%@include file="/WEB-INF/views/user/main.jsp"%>
+
 </head>
 
 
@@ -114,7 +114,7 @@ alert("성공!했당!.");
 
 <td>
 <div id="right">
-<form name="orderForm" method="post" action="orderForm.do"> 
+<form name="orderForm" method="post" action="orderForm.do" onsubmit="return checkSubmit()"> 
 <table style="margin-left:30%;">
 <tr>
 <td width="30"></td>
@@ -131,16 +131,21 @@ alert("성공!했당!.");
 
                                       
  <div style="width:277px; border-bottom:1px solid black; padding-bottom:17px; position:relative; text-align:left;">
-  
+  <ul id="sizeUL">
+<li>
 <label style="margin-left:10px;"> size  </label>
-<select id="sizea" name="sizea" class="basic_option" style="margin-left:35%">
-<option>----SELECT A OPTION----</option>
-<c:forEach var="size" items="${size}" >
+</li>
 
-<option value="${size}">${size}</option>
+<li>
+<select id="sizea" name="sizea" class="basic_option" style="margin-left:35%">
+
+<c:forEach var="leng" begin="0" end="${listCount}" >
+
+<option value="${size[leng]}">${size[leng]}-${quantity[leng]}</option>
 </c:forEach>
 </select>
-  
+</li>
+  </ul>
 </div>
                                            
                          
@@ -153,9 +158,9 @@ alert("성공!했당!.");
                                                                                                                     
        <div id="cart"> 
                                                             
-<a href="javascript:document.orderForm.submit()" class="button">바로구매 |</a>
-<a href="javascript:cartInsert()" class="button">장바구니담기</a>
-
+<a href="javascript:document.orderForm.submit();" class="button">바로구매 |</a>
+<a href="javascript:cartInsert()" class="button">장바구니담기|</a>
+<a href="javascript:history.go(-1)" class="button">목록으로</a>
 </div>
 </table>
 <input type="hidden" id="product_code" name="product_code" value="${vo.product_code}"/>

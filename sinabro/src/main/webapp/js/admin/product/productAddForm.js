@@ -65,5 +65,5 @@ function deleteFile(){
 	--filecount;
 }
 function addBrand(){
-	window.open("/sinabro/addBrandForm.mustang",width=100,height=100);
+	window.open("/sinabro/addBrandForm.mustang",'width=100 height=100 resizable=yes scrollbar=yes');
 }

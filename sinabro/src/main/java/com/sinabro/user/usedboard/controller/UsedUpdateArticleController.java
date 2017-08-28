@@ -17,28 +17,34 @@ import com.sinabro.user.usedboard.service.UsedUpdateArticleService;
 @Controller
 public class UsedUpdateArticleController {
 
-   private UsedUpdateArticleService usedUpdateArticleService;
+	private UsedUpdateArticleService usedUpdateArticleService;
 
-   
-   public void setUsedUpdateArticleService(UsedUpdateArticleService usedUpdateArticleService) {
-	this.usedUpdateArticleService = usedUpdateArticleService;
-}
+	public void setUsedUpdateArticleService(UsedUpdateArticleService usedUpdateArticleService) {
+		this.usedUpdateArticleService = usedUpdateArticleService;
+	}
 
-@RequestMapping(value = "usedupdateForm.do", method = RequestMethod.GET)
-   public ModelAndView setView(Integer num) {
-	  UsedBoardVO usedBoardVo = this.usedUpdateArticleService.getArticle(num);
-      Map<String, Object> model = new HashMap<String, Object>();
-      model.put("vo", usedBoardVo);
-      ModelAndView mav = new ModelAndView();
-      mav.setViewName("/usedBoard/updateForm");
-      mav.addAllObjects(model);
-      return mav;
-   }
+	@RequestMapping(value = "usedupdateForm.do", method = RequestMethod.GET)
+	public ModelAndView setView(Integer num) {
+		UsedBoardVO usedBoardVo = this.usedUpdateArticleService.getArticle(num);
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("vo", usedBoardVo);
+		String[] img;
+		img = usedBoardVo.getMainimg().split(";");
+		model.put("img", img);
+		ModelAndView mav = new ModelAndView();
+		System.out.println("1");
+		mav.setViewName("/usedBoard/updateForm");
+		mav.addAllObjects(model);
+		return mav;
+	}
 
-   @RequestMapping(value = "usedupdateForm.do", method = RequestMethod.POST)
-   public ModelAndView onSubmit(HttpServletRequest request, UsedBoardVO usedBoardVo) throws Exception {
-	   System.out.println("들어온다");
-      this.usedUpdateArticleService.updateArticle(usedBoardVo);
-      return new ModelAndView("redirect:usedlist.do");
-   }
+	@RequestMapping(value = "usedupdate.do", method = RequestMethod.POST)
+	public ModelAndView onSubmit(HttpServletRequest request, UsedBoardVO usedBoardVo) throws Exception {
+
+		String uploadPath = request.getRealPath("/images/used");
+		System.out.println("1");
+
+		this.usedUpdateArticleService.updateArticle(usedBoardVo, uploadPath);
+		return new ModelAndView("redirect:usedlist.do");
+	}
 }

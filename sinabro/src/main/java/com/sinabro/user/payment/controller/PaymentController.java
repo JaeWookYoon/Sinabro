@@ -19,6 +19,7 @@ import com.sinabro.model.CartVO;
 import com.sinabro.model.MemberVO;
 import com.sinabro.model.ProductVO;
 import com.sinabro.user.payment.service.PaymentService;
+import com.sinabro.util.MakeCode;
 
 @Controller
 public class PaymentController {
@@ -37,11 +38,15 @@ public class PaymentController {
 		HttpSession session=request.getSession(false);
 		try {
 		if(session.getId()==null||session.getId().equals(null)||session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {
-			model.setViewName("redirect:hi.do");
+			model.setViewName("redirect:loginForm.do");
 		}else {
 			String id=(String)session.getAttribute("loginId");
 			
 			if(cartvo.getProduct_codea()==null||cartvo.getProduct_codea().equals(null)) {
+				if(cartvo.getProduct_code()==null||cartvo.getProduct_code().equals(null)) {
+					model.addObject("nop", true);
+					model.setViewName("cart/cart");
+				}
 			String product_code=request.getParameter("product_code");
 			System.out.println(product_code);
 			String size=request.getParameter("sizea");
@@ -51,6 +56,8 @@ public class PaymentController {
 			String[]img=productimg.split(";");
 			productvo.setMainImg(img[0]);
 			productvo.setSizea(size);
+			int total=productvo.getPrice();
+			model.addObject("total",total);
 			model.addObject("product", productvo); 
 			
 			}else {
@@ -58,14 +65,17 @@ public class PaymentController {
 				List<String>size=cartvo.getSizeaa();
 				List<ProductVO>product=new ArrayList<ProductVO>();
 				for(int i=0;i<product_code.size();i++) {
-					product.add(paymentService.getProductOrder(product_code.get(i)));
+					product.add(paymentService.getProductOrder(product_code.get(i)));//productvo list발생
 				}
+				int total=0;
 				for(int i=0;i<product.size();i++) {
 					String mainImage=product.get(i).getMainImg().substring(0, product.get(i).getMainImg().length()-1);
 					String[]img=mainImage.split(";");
 					product.get(i).setMainImg(img[0]);
 					product.get(i).setSizea(size.get(i));
+					total+=product.get(i).getPrice();
 				}
+				model.addObject("total",total);
 				model.addObject("productList", product);
 			}
 			//member정보 보내기.
@@ -77,6 +87,7 @@ public class PaymentController {
 			model.addObject("phone1", phone1);
 			model.addObject("phone2", phone2);
 			model.addObject("phone3", phone3);
+			model.addObject("order_code", MakeCode.makeCode());
 			model.setViewName("order/paymentForm");
 		}
 		}catch(NullPointerException ne) {

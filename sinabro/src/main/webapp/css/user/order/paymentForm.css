@@ -38,11 +38,22 @@ th {
 #name {
 	width: 110px;
 }
-
-#email {
+#nameal {
+	width: 110px;
+}
+#emailal {
 	width: 170px;
 }
+#phone{
+	width:55px;
+}
+#phone1 {
+	width: 55px;
+}
 
+#phone2 {
+	width: 65px;
+}
 #phoneone {
 	width: 55px;
 }
@@ -163,4 +174,11 @@ background-color:#EAEAEA;
 		margin-top: 5%;
 		margin-bottom: 5%;
 }
-
+.productzone{
+	text-align:center;
+	width:200px;
+	border:none;
+}
+#order1 tr{
+	text-align:center;
+}

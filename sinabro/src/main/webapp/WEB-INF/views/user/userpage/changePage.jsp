@@ -8,12 +8,13 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="/sinabro/js/jquery-3.2.1.min.js"></script>
 <script src="/sinabro/js/user/member/updateForm.js"></script>
+<link rel="stylesheet" href="/sinabro/css/user/userpage/changePage.css"/>
 <%@include file="/WEB-INF/views/user/main.jsp"%>
 </head>
-<body>
-<div style="text-align: center;">
 <%@include file="/WEB-INF/views/user/userpage/myPageTab.jsp"%>
-</div>
+<body>
+
+
 <input type="hidden" name="check" id="check" value="${check}"/>
 <c:choose>
 <c:when test="${check != true}">
@@ -23,7 +24,7 @@
 </c:when>
 <c:when test="${check == true }">
 <c:set var="member" value="${vo}"/>
-<div>
+<div id="updateWrap">
 <form name="updateForm" method="post" action="updateUserInfo.do" onsubmit="return checkInput()">
 <table>
 <tr>
@@ -33,7 +34,7 @@
 <td>이름</td><td><input type="text" name="name" id="name" readonly="readonly" value="${member.name}"/></td>
 </tr>
 <tr>
-<td>비밀번호</td><td><input type="password" name="password" id="password" onkeypress="passCheck()" required="required"/><b id="passSecure" style="color:red;">보안정도: 하</b></td>
+<td>비밀번호</td><td><input type="password" name="password" id="password" onkeypress="passCheck()" required="required"/></td><td><b id="passSecure" style="color:red;">보안정도: 하</b></td>
 </tr>
 <tr>
 <td>비밀번호 확인</td><td><input type="password" name="passwordch" id="passwordch" required="required"/></td>
@@ -58,8 +59,8 @@
 </tr>
 
 </table>
-<input type="submit" value="수정"/>
-<a href="javascript:history.go(-1)">취소</a>
+<a href="javascript:document.updateForm.submit()" class="button">수정</a>
+<a href="javascript:history.go(-1)" class="button">취소</a>
 
 
 </form>

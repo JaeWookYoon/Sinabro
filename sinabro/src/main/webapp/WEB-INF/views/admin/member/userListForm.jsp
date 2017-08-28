@@ -14,8 +14,9 @@ body {
 	color: #898989;
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
-	margin-left: 20%;
-	margin-right: 20%;
+	margin-left: auto;
+	margin-right: auto;
+	width:1000px;
 	position: relative;
 }
 

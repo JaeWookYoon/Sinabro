@@ -137,6 +137,12 @@ public class CheckMemberServiceImpl implements CheckMemberService {
 		checkDAO.changePw(map);
 		return pw;
 	}
+
+	@Override
+	public int getPoint(String id) {
+		// TODO Auto-generated method stub
+		return checkDAO.getPoint(id);
+	}
 	
 }
 

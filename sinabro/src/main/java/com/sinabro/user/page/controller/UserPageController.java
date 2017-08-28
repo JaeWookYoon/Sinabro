@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinabro.model.BoardVO;
+import com.sinabro.model.MemberVO;
 import com.sinabro.user.page.service.UserPageService;
 import com.sinabro.util.Paging;
 
@@ -26,10 +27,13 @@ public class UserPageController {
 	public ModelAndView getMyPage(HttpServletRequest request) throws Exception{
 		ModelAndView model=new ModelAndView();
 		HttpSession session=request.getSession(false);
-		if(session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {
+		if(session.getId()==null||session.getId().equals(null)||session.getAttribute("loginId")==null||session.getAttribute("loginId").equals(null)) {
 			model.addObject("loginError", true);
 			model.setViewName("userpage/myPage");
 		}else {
+			String id=(String)session.getValue("loginId");
+			MemberVO vo=userPageService.getMemberInfo(id);
+			model.addObject("point", vo.getPoint());
 			model.setViewName("userpage/myPage");
 		}
 		return model;
